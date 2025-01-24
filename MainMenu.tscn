@@ -1,0 +1,130 @@
+[gd_scene load_steps=11 format=3 uid="uid://dpy0ovgeahftq"]
+
+[ext_resource type="Shader" path="res://MainMenu.gdshader" id="1_5mvky"]
+[ext_resource type="Texture2D" uid="uid://c5fba5a6puj1i" path="res://Sprites/Bubble Babes.png" id="1_evynn"]
+[ext_resource type="Texture2D" uid="uid://dvd2ycb5wrl66" path="res://Sprites/bubblebabe sticker.png" id="2_v77qr"]
+[ext_resource type="Shader" path="res://Bounce.gdshader" id="3_axnjk"]
+[ext_resource type="Shader" path="res://highlight.gdshader" id="4_l0tiq"]
+[ext_resource type="Texture2D" uid="uid://d3itbxjer2w1x" path="res://Sprites/halftone.png" id="6_g4kua"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jv84t"]
+shader = ExtResource("1_5mvky")
+shader_parameter/scroll_speed = 0.035
+shader_parameter/angle_degrees = 45.0
+shader_parameter/repeat_x = 7.0
+shader_parameter/repeat_y = 5.0
+shader_parameter/row_offset = 0.697
+shader_parameter/texture_to_scroll = ExtResource("2_v77qr")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_0akh7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i0n7b"]
+shader = ExtResource("3_axnjk")
+shader_parameter/do_abs = false
+shader_parameter/do_quantize = false
+shader_parameter/quantize_to = 1.0
+shader_parameter/sine_amplitude = Vector2(2, 10)
+shader_parameter/sine_speed = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lruqs"]
+shader = ExtResource("4_l0tiq")
+shader_parameter/Line_Smoothness = 0.045
+shader_parameter/Line_Width = 0.06
+shader_parameter/Brightness = 3.0
+shader_parameter/Rotation_deg = 30.0
+shader_parameter/Distortion = 1.8
+shader_parameter/Speed = 0.4
+shader_parameter/Position = 0.0
+shader_parameter/Position_Min = 0.25
+shader_parameter/Position_Max = 0.5
+shader_parameter/Alpha = 0.7
+shader_parameter/surface = ExtResource("1_evynn")
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.92549, 0.678431, 0.929412, 1)
+
+[node name="TextureRect2" type="TextureRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_g4kua")
+expand_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect"]
+material = SubResource("ShaderMaterial_jv84t")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_0akh7")
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.92549, 0.678431, 0.929412, 0.345098)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="ColorRect"]
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CanvasLayer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer"]
+material = SubResource("ShaderMaterial_i0n7b")
+layout_mode = 2
+texture = ExtResource("1_evynn")
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect/CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/TextureRect"]
+material = SubResource("ShaderMaterial_lruqs")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ColorRect/CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start
+"
+
+[node name="Button2" type="Button" parent="ColorRect/CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
