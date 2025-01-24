@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://dpy0ovgeahftq"]
+[gd_scene load_steps=20 format=3 uid="uid://dpy0ovgeahftq"]
 
 [ext_resource type="Shader" path="res://MainMenu.gdshader" id="1_5mvky"]
 [ext_resource type="Texture2D" uid="uid://c5fba5a6puj1i" path="res://Sprites/Bubble Babes.png" id="1_evynn"]
 [ext_resource type="Texture2D" uid="uid://dvd2ycb5wrl66" path="res://Sprites/bubblebabe sticker.png" id="2_v77qr"]
 [ext_resource type="Shader" path="res://Bounce.gdshader" id="3_axnjk"]
+[ext_resource type="Shader" path="res://grain.gdshader" id="4_frpt5"]
 [ext_resource type="Shader" path="res://highlight.gdshader" id="4_l0tiq"]
 [ext_resource type="Texture2D" uid="uid://d3itbxjer2w1x" path="res://Sprites/halftone.png" id="6_g4kua"]
 [ext_resource type="Texture2D" uid="uid://ddgl2d6nib0dd" path="res://Sprites/start heart- 24 January 2025 at 21.04.35.png" id="7_1gcmt"]
@@ -47,6 +48,11 @@ shader_parameter/Position_Max = 0.5
 shader_parameter/Alpha = 0.7
 shader_parameter/surface = ExtResource("1_evynn")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_av61w"]
+shader = ExtResource("4_frpt5")
+shader_parameter/grain_amount = 0.05
+shader_parameter/grain_size = 1.0
+
 [node name="CanvasLayer" type="CanvasLayer"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -86,9 +92,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.92549, 0.678431, 0.929412, 0.345098)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="ColorRect"]
-
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect/CanvasLayer"]
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -99,17 +104,17 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CanvasLayer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 
-[node name="Logo" type="TextureRect" parent="ColorRect/CanvasLayer/MarginContainer/VBoxContainer"]
+[node name="Logo" type="TextureRect" parent="ColorRect/MarginContainer/VBoxContainer"]
 material = SubResource("ShaderMaterial_i0n7b")
 layout_mode = 2
 texture = ExtResource("1_evynn")
 
-[node name="Shine" type="ColorRect" parent="ColorRect/CanvasLayer/MarginContainer/VBoxContainer/Logo"]
+[node name="Shine" type="ColorRect" parent="ColorRect/MarginContainer/VBoxContainer/Logo"]
 material = SubResource("ShaderMaterial_lruqs")
 layout_mode = 1
 anchors_preset = 15
@@ -118,7 +123,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Play" type="TextureButton" parent="ColorRect/CanvasLayer/MarginContainer/VBoxContainer"]
+[node name="Play" type="TextureButton" parent="ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -126,7 +131,7 @@ texture_normal = ExtResource("7_1gcmt")
 texture_pressed = ExtResource("8_owtcy")
 texture_hover = ExtResource("9_mdofb")
 
-[node name="Quit" type="TextureButton" parent="ColorRect/CanvasLayer/MarginContainer"]
+[node name="Quit" type="TextureButton" parent="ColorRect/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
@@ -137,4 +142,13 @@ texture_hover = ExtResource("12_vclds")
 [node name="Node2D" type="Node2D" parent="."]
 script = ExtResource("13_qqt7o")
 
-[connection signal="pressed" from="ColorRect/CanvasLayer/MarginContainer/Quit" to="Node2D" method="_on_quit_pressed"]
+[node name="ColorRect2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_av61w")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="pressed" from="ColorRect/MarginContainer/Quit" to="Node2D" method="_on_quit_pressed"]
