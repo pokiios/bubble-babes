@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dpy0ovgeahftq"]
+[gd_scene load_steps=14 format=3 uid="uid://dpy0ovgeahftq"]
 
 [ext_resource type="Shader" path="res://MainMenu.gdshader" id="1_5mvky"]
 [ext_resource type="Texture2D" uid="uid://c5fba5a6puj1i" path="res://Sprites/Bubble Babes.png" id="1_evynn"]
@@ -6,6 +6,9 @@
 [ext_resource type="Shader" path="res://Bounce.gdshader" id="3_axnjk"]
 [ext_resource type="Shader" path="res://highlight.gdshader" id="4_l0tiq"]
 [ext_resource type="Texture2D" uid="uid://d3itbxjer2w1x" path="res://Sprites/halftone.png" id="6_g4kua"]
+[ext_resource type="Texture2D" uid="uid://ddgl2d6nib0dd" path="res://Sprites/start heart- 24 January 2025 at 21.04.35.png" id="7_1gcmt"]
+[ext_resource type="Texture2D" uid="uid://ddw2joe5hqbdy" path="res://Sprites/heartstartinvert.png" id="8_owtcy"]
+[ext_resource type="Texture2D" uid="uid://didkj6jy6eop4" path="res://Sprites/heartstartblue.png" id="9_mdofb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jv84t"]
 shader = ExtResource("1_5mvky")
@@ -119,6 +122,13 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="ColorRect/CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("7_1gcmt")
+texture_pressed = ExtResource("8_owtcy")
+texture_hover = ExtResource("9_mdofb")
 
 [node name="Button" type="Button" parent="ColorRect/CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
