@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dpy0ovgeahftq"]
+[gd_scene load_steps=17 format=3 uid="uid://dpy0ovgeahftq"]
 
 [ext_resource type="Shader" path="res://MainMenu.gdshader" id="1_5mvky"]
 [ext_resource type="Texture2D" uid="uid://c5fba5a6puj1i" path="res://Sprites/Bubble Babes.png" id="1_evynn"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://ddgl2d6nib0dd" path="res://Sprites/start heart- 24 January 2025 at 21.04.35.png" id="7_1gcmt"]
 [ext_resource type="Texture2D" uid="uid://ddw2joe5hqbdy" path="res://Sprites/heartstartinvert.png" id="8_owtcy"]
 [ext_resource type="Texture2D" uid="uid://didkj6jy6eop4" path="res://Sprites/heartstartblue.png" id="9_mdofb"]
+[ext_resource type="Texture2D" uid="uid://ykqn4uyk1d6j" path="res://Sprites/x.png" id="10_jkno4"]
+[ext_resource type="Texture2D" uid="uid://dtxp5yqy76qcp" path="res://Sprites/x (2).png" id="11_lx0ny"]
+[ext_resource type="Texture2D" uid="uid://cscr166011xld" path="res://Sprites/x (1).png" id="12_vclds"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jv84t"]
 shader = ExtResource("1_5mvky")
@@ -95,20 +98,17 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/CanvasLayer/MarginContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CanvasLayer/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CanvasLayer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="ColorRect/CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="ColorRect/CanvasLayer/MarginContainer/VBoxContainer"]
 material = SubResource("ShaderMaterial_i0n7b")
 layout_mode = 2
 texture = ExtResource("1_evynn")
 
-[node name="ColorRect" type="ColorRect" parent="ColorRect/CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/TextureRect"]
+[node name="ColorRect" type="ColorRect" parent="ColorRect/CanvasLayer/MarginContainer/VBoxContainer/TextureRect"]
 material = SubResource("ShaderMaterial_lruqs")
 layout_mode = 1
 anchors_preset = 15
@@ -117,24 +117,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect/CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/CanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CanvasLayer/MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="TextureButton" type="TextureButton" parent="ColorRect/CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="TextureButton" type="TextureButton" parent="ColorRect/CanvasLayer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 texture_normal = ExtResource("7_1gcmt")
 texture_pressed = ExtResource("8_owtcy")
 texture_hover = ExtResource("9_mdofb")
 
-[node name="Button" type="Button" parent="ColorRect/CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="TextureButton" type="TextureButton" parent="ColorRect/CanvasLayer/MarginContainer"]
 layout_mode = 2
-text = "Start
-"
-
-[node name="Button2" type="Button" parent="ColorRect/CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Quit"
+size_flags_horizontal = 8
+texture_normal = ExtResource("10_jkno4")
+texture_pressed = ExtResource("11_lx0ny")
+texture_hover = ExtResource("12_vclds")
