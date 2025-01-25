@@ -14,7 +14,7 @@ extends Control
 @onready var FourthScore = $MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer4/HBoxContainer/FourthScore
 @onready var FifthScore = $MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer5/HBoxContainer/FifthScore
 var scoresArray:Array
-var currentScore = 03
+var currentScore = 13
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
