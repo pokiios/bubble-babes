@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://3jx3bsvdpka7"]
 
-[ext_resource type="Shader" path="res://Scenes/Timer.gdshader" id="1_34xms"]
-[ext_resource type="Script" path="res://Scenes/timer.gd" id="1_no5at"]
+[ext_resource type="Shader" path="res://Shaders/Timer.gdshader" id="1_34xms"]
+[ext_resource type="Script" path="res://Scripts/timer.gd" id="1_no5at"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e0rgw"]
 shader = ExtResource("1_34xms")
