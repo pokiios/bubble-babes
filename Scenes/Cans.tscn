@@ -23,6 +23,7 @@ size_flags_vertical = 4
 texture = ExtResource("2_1wgq8")
 
 [node name="Conk_1" parent="." instance=ExtResource("3_tfbxa")]
+position = Vector2(375, 494)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 2
@@ -32,9 +33,9 @@ offset = Vector2(-500, -125)
 script = ExtResource("5_c1slh")
 
 [node name="Conk_2" parent="." instance=ExtResource("3_tfbxa")]
-position = Vector2(631, 536)
+position = Vector2(675, 525)
 
 [node name="Conk_3" parent="." instance=ExtResource("3_tfbxa")]
-position = Vector2(963, 518)
+position = Vector2(990, 512)
 
 [connection signal="timeDone" from="CanvasLayer/LevelTimer" to="." method="_on_level_timer_time_done"]

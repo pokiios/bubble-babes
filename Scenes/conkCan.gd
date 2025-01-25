@@ -48,6 +48,7 @@ func _process(delta: float) -> void:
 			$".".texture =CONK_SPLODE_TEXTURE1
 		if temp == 1:
 			$".".texture =CONK_SPLODE_TEXTURE2
+		$AnimationPlayer.play("canshake")
 		is_shaken = true
 
 	#if !mouse_left_down && is_conk:
