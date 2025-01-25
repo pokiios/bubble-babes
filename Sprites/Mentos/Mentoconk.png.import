@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5fba5a6puj1i"
-path="res://.godot/imported/Bubble Babes.png-2f537027b2159581e7f56481ff48f4d4.ctex"
+uid="uid://cc2okopurv226"
+path="res://.godot/imported/Mentoconk.png-57a9fadbe1b54386ead1067e135e8d02.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Bubble Babes.png"
-dest_files=["res://.godot/imported/Bubble Babes.png-2f537027b2159581e7f56481ff48f4d4.ctex"]
+source_file="res://Sprites/Mentos/Mentoconk.png"
+dest_files=["res://.godot/imported/Mentoconk.png-57a9fadbe1b54386ead1067e135e8d02.ctex"]
 
 [params]
 

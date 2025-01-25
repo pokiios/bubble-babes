@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ykqn4uyk1d6j"
-path="res://.godot/imported/x.png-f75781694766a86e768c9f461fa9bd0e.ctex"
+uid="uid://twlh5y7b0fvg"
+path="res://.godot/imported/Mento.png-a49dadff9ea8f72426e413574c2cad1c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/x.png"
-dest_files=["res://.godot/imported/x.png-f75781694766a86e768c9f461fa9bd0e.ctex"]
+source_file="res://Sprites/Mentos/Mento.png"
+dest_files=["res://.godot/imported/Mento.png-a49dadff9ea8f72426e413574c2cad1c.ctex"]
 
 [params]
 

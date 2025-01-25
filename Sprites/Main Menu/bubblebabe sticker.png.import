@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddw2joe5hqbdy"
-path="res://.godot/imported/heartstartinvert.png-56babffe8d73da9e7e46331746a0dfba.ctex"
+uid="uid://dvd2ycb5wrl66"
+path="res://.godot/imported/bubblebabe sticker.png-715b2cac7a72268d66ade7bc6a96e5ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/heartstartinvert.png"
-dest_files=["res://.godot/imported/heartstartinvert.png-56babffe8d73da9e7e46331746a0dfba.ctex"]
+source_file="res://Sprites/Main Menu/bubblebabe sticker.png"
+dest_files=["res://.godot/imported/bubblebabe sticker.png-715b2cac7a72268d66ade7bc6a96e5ee.ctex"]
 
 [params]
 

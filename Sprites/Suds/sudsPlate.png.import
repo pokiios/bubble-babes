@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cscr166011xld"
-path="res://.godot/imported/x (1).png-55f1988a9e2ae4ae71f6f9ccd4c1b6f5.ctex"
+uid="uid://cngtwirl7cpxt"
+path="res://.godot/imported/sudsPlate.png-7f6c9b114c5fe02070147e362cf30ab7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/x (1).png"
-dest_files=["res://.godot/imported/x (1).png-55f1988a9e2ae4ae71f6f9ccd4c1b6f5.ctex"]
+source_file="res://Sprites/Suds/sudsPlate.png"
+dest_files=["res://.godot/imported/sudsPlate.png-7f6c9b114c5fe02070147e362cf30ab7.ctex"]
 
 [params]
 

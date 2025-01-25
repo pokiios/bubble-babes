@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://didkj6jy6eop4"
-path="res://.godot/imported/heartstartblue.png-dc23cef355d2dacf0981694833727c4f.ctex"
+uid="uid://dn5plkeb0vr7"
+path="res://.godot/imported/Mentobackground.png-61cacb6f6b1163eef8cdeaf94284f19f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/heartstartblue.png"
-dest_files=["res://.godot/imported/heartstartblue.png-dc23cef355d2dacf0981694833727c4f.ctex"]
+source_file="res://Sprites/Mentos/Mentobackground.png"
+dest_files=["res://.godot/imported/Mentobackground.png-61cacb6f6b1163eef8cdeaf94284f19f.ctex"]
 
 [params]
 

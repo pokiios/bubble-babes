@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvd2ycb5wrl66"
-path="res://.godot/imported/bubblebabe sticker.png-bb7edba0eef87ebf731aea20a93d71a3.ctex"
+uid="uid://fnww6f75f04f"
+path="res://.godot/imported/sudsBrockenPlate.png-94a0477781961733f0fc6f6a7e948742.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/bubblebabe sticker.png"
-dest_files=["res://.godot/imported/bubblebabe sticker.png-bb7edba0eef87ebf731aea20a93d71a3.ctex"]
+source_file="res://Sprites/Suds/sudsBrockenPlate.png"
+dest_files=["res://.godot/imported/sudsBrockenPlate.png-94a0477781961733f0fc6f6a7e948742.ctex"]
 
 [params]
 
