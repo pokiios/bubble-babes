@@ -87,7 +87,7 @@ func _on_submit_button_pressed() -> void:
 	var scorerName = NameBox.text
 	#print(scorerName)
 	file.seek_end()
-	file.store_string(":" + scorerName + "," + currentScore)
+	file.store_string(":" + scorerName + "," + str(currentScore))
 	_sort_scores()
 	_update_displayed_scores()
 	#print(readText)

@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0frtplj2morq"]
+[gd_scene load_steps=6 format=3 uid="uid://d0frtplj2morq"]
 
 [ext_resource type="Script" path="res://Scenes/leaderboard.gd" id="1_whtpc"]
+[ext_resource type="Texture2D" uid="uid://de4hbrn0f16ni" path="res://Assets/Shake the Can/shake-the-can-background.png" id="2_oljek"]
+[ext_resource type="Shader" path="res://Shaders/MainMenu.gdshader" id="3_icc48"]
+[ext_resource type="Texture2D" uid="uid://dvd2ycb5wrl66" path="res://Sprites/Main Menu/bubblebabe sticker.png" id="4_4gmhf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mqgl5"]
+shader = ExtResource("3_icc48")
+shader_parameter/scroll_speed = 0.08
+shader_parameter/angle_degrees = 45.0
+shader_parameter/repeat_x = 20.0
+shader_parameter/repeat_y = 1.854
+shader_parameter/row_offset = 1.0
+shader_parameter/texture_to_scroll = ExtResource("4_4gmhf")
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -11,14 +23,23 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_whtpc")
 
-[node name="TextureRect" type="ColorRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.223529, 0.490196, 0.521569, 1)
+texture = ExtResource("2_oljek")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_mqgl5")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
