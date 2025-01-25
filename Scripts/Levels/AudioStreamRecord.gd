@@ -42,6 +42,3 @@ func trigger_effect():
 			if success_percent >= 1 and !has_been_called:
 				has_been_called = true
 				$"../AnimationPlayer".play("Shake")
-				timer.start()
-				if timer.time_left <= 0:
-					$"../AnimationPlayer".stop()

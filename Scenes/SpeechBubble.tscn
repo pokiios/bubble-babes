@@ -1,9 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://ccemlei8prxfw"]
+[gd_scene load_steps=12 format=3 uid="uid://ccemlei8prxfw"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/SpeechBubble.gd" id="1_4lyl2"]
 [ext_resource type="Script" path="res://Scripts/Levels/AudioStreamRecord.gd" id="1_fauk2"]
+[ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="1_t4yun"]
 [ext_resource type="Texture2D" uid="uid://bwwuk3qcnpjoa" path="res://Sprites/Scream/speechbubbleScream.png" id="2_fbty3"]
 [ext_resource type="Texture2D" uid="uid://1ujxspeb2imn" path="res://Sprites/Scream/speechbubblebk.png" id="3_7u717"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6a7r4"]
 
 [sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_fdbc1"]
 
@@ -44,7 +47,11 @@ _data = {
 "Shake": SubResource("Animation_1lvvp")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nr5i8"]
+shader = ExtResource("1_t4yun")
+
 [node name="Node2D" type="Node2D"]
+material = SubResource("ShaderMaterial_6a7r4")
 script = ExtResource("1_4lyl2")
 
 [node name="AudioStreamRecord" type="AudioStreamPlayer2D" parent="."]
@@ -75,3 +82,8 @@ libraries = {
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
+
+[node name="GrayScale" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_nr5i8")
+offset_right = 40.0
+offset_bottom = 40.0
