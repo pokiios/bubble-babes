@@ -1,0 +1,118 @@
+[gd_scene load_steps=13 format=3 uid="uid://cc1g0xs1ce6al"]
+
+[ext_resource type="Script" path="res://Scripts/Levels/BubblegumPop.gd" id="1_b4pfb"]
+[ext_resource type="Script" path="res://Scripts/Levels/AudioStreamRecord.gd" id="2_otn4g"]
+[ext_resource type="Texture2D" uid="uid://d22ty7cnu5nw0" path="res://Assets/Bubblegum Pop/bubblegum-pop-background.png" id="2_ricd4"]
+[ext_resource type="Texture2D" uid="uid://dkf3fwne5qrtc" path="res://Assets/Bubblegum Pop/bubble-size-1.png" id="3_2revj"]
+[ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="5_yb4oj"]
+[ext_resource type="PackedScene" uid="uid://3jx3bsvdpka7" path="res://Scenes/Timer.tscn" id="6_r0ow3"]
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_7mi8s"]
+
+[sub_resource type="Animation" id="Animation_ahi3l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpeechbubbleScream:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GrayScale:material:shader_parameter/gray_a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_1lvvp"]
+resource_name = "Shake"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpeechbubbleScream:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4, 0.533333, 0.666667, 0.766667, 0.866667, 0.966667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 0), Vector2(28, -32), Vector2(-40, 40), Vector2(-32, -42), Vector2(24, 34), Vector2(6, -16), Vector2(52, -14), Vector2(-6, -82), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wukbn"]
+resource_name = "fade_gray"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrayScale:material:shader_parameter/gray_a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.392292, 1.62451),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ncu30"]
+_data = {
+"RESET": SubResource("Animation_ahi3l"),
+"Shake": SubResource("Animation_1lvvp"),
+"fade_gray": SubResource("Animation_wukbn")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_23au6"]
+shader = ExtResource("5_yb4oj")
+shader_parameter/gray_a = 0.0
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_b4pfb")
+
+[node name="AudioStreamRecord" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamMicrophone_7mi8s")
+autoplay = true
+bus = &"Record"
+script = ExtResource("2_otn4g")
+success_increments = 0.01
+threshhold = -5
+levels = 0
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_ricd4")
+centered = false
+
+[node name="Bubble" type="Sprite2D" parent="."]
+texture = ExtResource("3_2revj")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ncu30")
+}
+
+[node name="GrayScale" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_23au6")
+offset_right = 1280.0
+offset_bottom = 960.0
+
+[node name="LevelTimer" parent="." instance=ExtResource("6_r0ow3")]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1280.0
+offset_bottom = 960.0
+
+[connection signal="level_complete" from="AudioStreamRecord" to="." method="_on_audio_stream_record_level_complete"]
+[connection signal="timeDone" from="LevelTimer" to="." method="_on_level_timer_time_done"]
