@@ -14,6 +14,7 @@ extends Control
 @onready var FourthScore = $MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer4/HBoxContainer/FourthScore
 @onready var FifthScore = $MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer5/HBoxContainer/FifthScore
 var scoresArray:Array
+var currentScore = 03
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,14 +25,16 @@ func _ready() -> void:
 	else:
 		file = FileAccess.open(scoreFile, FileAccess.READ_WRITE) # READ_WRITE is weak sauce and cannot create life
 	
+	_sort_scores()
+	_update_displayed_scores()
+
+func _sort_scores():
 	#Read file text and set it to a variable
 	var readText = file.get_as_text()
 	var splitText = readText.split(":")
 	
-	var highNum = 0
-	#for numb in splitText:
-		#if numb.is_valid_int():
-			#if numb > highNum:
+	scoresArray.clear()
+	
 	var temp:Array
 	for each in splitText:
 		temp = each.split(",")
@@ -46,38 +49,30 @@ func _ready() -> void:
 			scoresArray[i+1] = scoresArray[i]
 			i = i - 1
 		scoresArray[i+1] = key
-		
-
-
-		
+	scoresArray.reverse()
 	print ("After")
 	print (scoresArray)
-	var count = 0
-	for split in splitText:
-		count += 1
-		match count:
+
+func _update_displayed_scores():
+	var index = 0
+	for a in scoresArray:
+		match index:
+			0:
+				FirstText.text = scoresArray[index][0]
+				FirstScore.text = scoresArray[index][1]
 			1:
-				FirstText.text = split
+				SecondText.text = scoresArray[index][0]
+				SecondScore.text = scoresArray[index][1]
 			2:
-				SecondText.text = split
+				ThirdText.text = scoresArray[index][0]
+				ThirdScore.text = scoresArray[index][1]
 			3:
-				ThirdText.text = split
+				FourthText.text = scoresArray[index][0]
+				FourthScore.text = scoresArray[index][1]
 			4:
-				FourthText.text = split
-			5:
-				FifthText.text = split
-			6:
-				FirstScore.text = split
-			7:
-				SecondScore.text = split
-			8:
-				ThirdScore.text = split
-			9:
-				FourthScore.text = split
-			10:
-				FifthScore.text = split
-	#FirstText.text = readText
-	#print(readText)
+				FifthText.text = scoresArray[index][0]
+				FifthScore.text = scoresArray[index][1]
+		index += 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -91,7 +86,8 @@ func _on_menu_button_pressed() -> void:
 func _on_submit_button_pressed() -> void:
 	var scorerName = NameBox.text
 	#print(scorerName)
-	file.store_string(scorerName + "," + "0000" + ":")
-	var readText = file.get_as_text()
-	FirstText.text = readText
+	file.seek_end()
+	file.store_string(":" + scorerName + "," + currentScore)
+	_sort_scores()
+	_update_displayed_scores()
 	#print(readText)
