@@ -1,5 +1,5 @@
 extends Control
-class_name LevelTimer
+#class_name LevelTimer
 
 @export var timeToPlay = 5
 @onready var timer = $Timer

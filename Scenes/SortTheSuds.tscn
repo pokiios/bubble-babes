@@ -1,0 +1,174 @@
+[gd_scene load_steps=16 format=3 uid="uid://de6q6h0tkqyhm"]
+
+[ext_resource type="Script" path="res://Scenes/sort_the_suds.gd" id="1_3orje"]
+[ext_resource type="Texture2D" uid="uid://b72j03hdomixx" path="res://Sprites/Suds/sudsBackground.png" id="1_doq7f"]
+[ext_resource type="Texture2D" uid="uid://cngtwirl7cpxt" path="res://Sprites/Suds/sudsPlate.png" id="3_0knse"]
+[ext_resource type="PackedScene" uid="uid://3jx3bsvdpka7" path="res://Scenes/Timer.tscn" id="3_guwsj"]
+[ext_resource type="Texture2D" uid="uid://cdk1wfcrbjvpf" path="res://Sprites/Suds/sudsBubble.png" id="4_hilax"]
+[ext_resource type="Texture2D" uid="uid://bkr8mlxxsu28k" path="res://Sprites/Suds/sudsFinger.png" id="5_4nuhl"]
+[ext_resource type="Script" path="res://MentoHand.gd" id="6_2vvo2"]
+[ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="8_xd727"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4qq3x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r5ubu"]
+
+[sub_resource type="Animation" id="Animation_ahi3l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpeechbubbleScream:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GrayScale:material:shader_parameter/gray_a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_1lvvp"]
+resource_name = "Shake"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpeechbubbleScream:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4, 0.533333, 0.666667, 0.766667, 0.866667, 0.966667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 0), Vector2(28, -32), Vector2(-40, 40), Vector2(-32, -42), Vector2(24, 34), Vector2(6, -16), Vector2(52, -14), Vector2(-6, -82), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wukbn"]
+resource_name = "fade_gray"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrayScale:material:shader_parameter/gray_a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.392292, 1.62451),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ncu30"]
+_data = {
+"RESET": SubResource("Animation_ahi3l"),
+"Shake": SubResource("Animation_1lvvp"),
+"fade_gray": SubResource("Animation_wukbn")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xylgg"]
+shader = ExtResource("8_xd727")
+shader_parameter/gray_a = 0.0
+
+[node name="SortTheSuds" type="Node2D"]
+script = ExtResource("1_3orje")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 960.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_doq7f")
+
+[node name="LevelTimer" parent="." instance=ExtResource("3_guwsj")]
+
+[node name="Plate" type="Sprite2D" parent="."]
+position = Vector2(692, 483)
+scale = Vector2(0.700521, 0.700521)
+texture = ExtResource("3_0knse")
+
+[node name="PlateCollision" type="Area2D" parent="Plate"]
+
+[node name="PlateCollisionShape" type="CollisionShape2D" parent="Plate/PlateCollision"]
+position = Vector2(-45.6803, 25.6952)
+scale = Vector2(46, 46)
+shape = SubResource("CircleShape2D_4qq3x")
+
+[node name="Sud" type="Sprite2D" parent="."]
+position = Vector2(504, 376)
+scale = Vector2(0.700521, 0.700521)
+texture = ExtResource("4_hilax")
+
+[node name="SudCollision" type="Area2D" parent="Sud"]
+
+[node name="SudCollisionShape" type="CollisionShape2D" parent="Sud/SudCollision"]
+position = Vector2(2.85502, -2.85497)
+scale = Vector2(10, 10)
+shape = SubResource("CircleShape2D_r5ubu")
+
+[node name="Sud2" type="Sprite2D" parent="."]
+position = Vector2(884, 563)
+scale = Vector2(0.700521, 0.700521)
+texture = ExtResource("4_hilax")
+
+[node name="SudCollision2" type="Area2D" parent="Sud2"]
+position = Vector2(-542.454, -266.944)
+scale = Vector2(1, 1)
+
+[node name="SudCollisionShape2" type="CollisionShape2D" parent="Sud2/SudCollision2"]
+position = Vector2(542.454, 261.234)
+scale = Vector2(10, 10)
+shape = SubResource("CircleShape2D_r5ubu")
+
+[node name="Sud3" type="Sprite2D" parent="."]
+position = Vector2(574, 634)
+scale = Vector2(0.700521, 0.700521)
+texture = ExtResource("4_hilax")
+
+[node name="SudCollision3" type="Area2D" parent="Sud3"]
+position = Vector2(-99.9257, -368.297)
+scale = Vector2(1, 1)
+
+[node name="SudCollisionShape3" type="CollisionShape2D" parent="Sud3/SudCollision3"]
+position = Vector2(102.781, 364.015)
+scale = Vector2(10, 10)
+shape = SubResource("CircleShape2D_r5ubu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(49.9999, 55.9999)
+scale = Vector2(1.02917, 1.02526)
+texture = ExtResource("5_4nuhl")
+offset = Vector2(550, 400)
+script = ExtResource("6_2vvo2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ncu30")
+}
+
+[node name="GrayScale" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_xylgg")
+offset_right = 1280.0
+offset_bottom = 960.0
+mouse_filter = 2
+
+[connection signal="timeDone" from="LevelTimer" to="." method="_on_level_timer_time_done"]
+[connection signal="mouse_entered" from="Plate/PlateCollision" to="." method="_on_plate_collision_mouse_entered"]
+[connection signal="mouse_entered" from="Sud/SudCollision" to="." method="_on_sud_collision_mouse_entered"]
+[connection signal="mouse_exited" from="Sud/SudCollision" to="." method="_on_sud_collision_mouse_exited"]
+[connection signal="mouse_entered" from="Sud2/SudCollision2" to="." method="_on_sud_collision_2_mouse_entered"]
+[connection signal="mouse_exited" from="Sud2/SudCollision2" to="." method="_on_sud_collision_2_mouse_exited"]
+[connection signal="mouse_entered" from="Sud3/SudCollision3" to="." method="_on_sud_collision_3_mouse_entered"]
+[connection signal="mouse_exited" from="Sud3/SudCollision3" to="." method="_on_sud_collision_3_mouse_exited"]
