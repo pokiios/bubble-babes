@@ -85,10 +85,18 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/margin_top = 105
 
-[node name="1st" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer"]
+layout_mode = 2
+
+[node name="FirstName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 56
-text = "1st - 0000"
+text = "1st "
+
+[node name="FirstScore" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = " 0000"
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
