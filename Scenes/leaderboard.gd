@@ -14,7 +14,7 @@ extends Control
 @onready var FourthScore = $MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer4/HBoxContainer/FourthScore
 @onready var FifthScore = $MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer5/HBoxContainer/FifthScore
 var scoresArray:Array
-var currentScore = 03
+var currentScore = 13
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -87,7 +87,7 @@ func _on_submit_button_pressed() -> void:
 	var scorerName = NameBox.text
 	#print(scorerName)
 	file.seek_end()
-	file.store_string(":" + scorerName + "," + currentScore)
+	file.store_string(":" + scorerName + "," + str(currentScore))
 	_sort_scores()
 	_update_displayed_scores()
 	#print(readText)

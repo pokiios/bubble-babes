@@ -1,6 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0frtplj2morq"]
+[gd_scene load_steps=7 format=3 uid="uid://d0frtplj2morq"]
 
 [ext_resource type="Script" path="res://Scenes/leaderboard.gd" id="1_whtpc"]
+[ext_resource type="Texture2D" uid="uid://d3itbxjer2w1x" path="res://Sprites/Main Menu/halftone.png" id="2_ce8ia"]
+[ext_resource type="Shader" path="res://Shaders/MainMenu.gdshader" id="3_icc48"]
+[ext_resource type="Texture2D" uid="uid://cdk1wfcrbjvpf" path="res://Sprites/Suds/sudsBubble.png" id="4_dcefy"]
+[ext_resource type="FontFile" uid="uid://dohjlwv7dn6k7" path="res://Fonts/Excelorate-Font.otf" id="5_4fxv7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mqgl5"]
+shader = ExtResource("3_icc48")
+shader_parameter/scroll_speed = 0.02
+shader_parameter/angle_degrees = 45.0
+shader_parameter/repeat_x = 4.0
+shader_parameter/repeat_y = 4.0
+shader_parameter/row_offset = 1.0
+shader_parameter/texture_to_scroll = ExtResource("4_dcefy")
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -11,14 +24,32 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_whtpc")
 
-[node name="TextureRect" type="ColorRect" parent="."]
+[node name="ColorRect2" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.223529, 0.490196, 0.521569, 1)
+color = Color(0.215686, 0.807843, 0.929412, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ce8ia")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_mqgl5")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -36,23 +67,29 @@ layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 265
-theme_override_constants/margin_top = 275
-theme_override_constants/margin_right = 240
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 300
+theme_override_constants/margin_right = 200
 
 [node name="High Score" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.678431, 0.929412, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.431892, 0.8091, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("5_4fxv7")
 theme_override_font_sizes/font_size = 70
 text = "HIGH SCORE"
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 75
-theme_override_constants/margin_top = 145
-theme_override_constants/margin_right = 70
+theme_override_constants/margin_left = 125
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 125
 
 [node name="Enter Name" type="LineEdit" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer2"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("5_4fxv7")
 theme_override_font_sizes/font_size = 82
 placeholder_text = "Enter Name"
 alignment = 1
@@ -60,22 +97,30 @@ max_length = 5
 
 [node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 195
+theme_override_constants/margin_left = 250
 theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 195
+theme_override_constants/margin_right = 250
 
 [node name="Submit Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer3"]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 0.85098, 0, 1)
+theme_override_colors/font_color = Color(0.92549, 0.678431, 0.929412, 1)
+theme_override_fonts/font = ExtResource("5_4fxv7")
+theme_override_font_sizes/font_size = 30
 text = "Submit"
 
 [node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 195
+theme_override_constants/margin_left = 250
 theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 195
+theme_override_constants/margin_right = 250
 
 [node name="Menu Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer4"]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 0.85098, 0, 1)
+theme_override_colors/font_color = Color(0.92549, 0.678431, 0.929412, 1)
+theme_override_fonts/font = ExtResource("5_4fxv7")
+theme_override_font_sizes/font_size = 30
 text = "Menu"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
@@ -84,23 +129,36 @@ layout_mode = 2
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_constants/margin_top = 105
+theme_override_constants/margin_right = 60
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer"]
 layout_mode = 2
 
 [node name="FirstName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.678431, 0.929412, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.431892, 0.8091, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("5_4fxv7")
 theme_override_font_sizes/font_size = 56
 text = "1st "
 
 [node name="FirstScore" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.678431, 0.929412, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.431892, 0.8091, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("5_4fxv7")
 theme_override_font_sizes/font_size = 56
 text = " 0000"
+horizontal_alignment = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_constants/margin_top = 105
+theme_override_constants/margin_right = 60
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer2"]
 layout_mode = 2
@@ -108,64 +166,111 @@ alignment = 1
 
 [node name="SecondName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer2/HBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.678431, 0.929412, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.431892, 0.8091, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("5_4fxv7")
 theme_override_font_sizes/font_size = 56
 text = "2nd"
 
 [node name="SecondScore" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer2/HBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.678431, 0.929412, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.431892, 0.8091, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("5_4fxv7")
 theme_override_font_sizes/font_size = 56
 text = " 0000"
+horizontal_alignment = 2
 
 [node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_constants/margin_top = 105
+theme_override_constants/margin_right = 60
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer3"]
 layout_mode = 2
 
 [node name="ThirdName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer3/HBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.678431, 0.929412, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.431892, 0.8091, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("5_4fxv7")
 theme_override_font_sizes/font_size = 56
 text = "3rd"
 
 [node name="ThirdScore" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer3/HBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.678431, 0.929412, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.431892, 0.8091, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("5_4fxv7")
 theme_override_font_sizes/font_size = 56
 text = " 0000"
+horizontal_alignment = 2
 
 [node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_constants/margin_top = 105
+theme_override_constants/margin_right = 60
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer4"]
 layout_mode = 2
 
 [node name="FourthName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer4/HBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.678431, 0.929412, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.431892, 0.8091, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("5_4fxv7")
 theme_override_font_sizes/font_size = 56
 text = "4th"
 
 [node name="FourthScore" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer4/HBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.678431, 0.929412, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.431892, 0.8091, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("5_4fxv7")
 theme_override_font_sizes/font_size = 56
 text = " 0000"
+horizontal_alignment = 2
 
 [node name="MarginContainer5" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_constants/margin_top = 105
+theme_override_constants/margin_right = 60
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer5"]
 layout_mode = 2
 
 [node name="FifthName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer5/HBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.678431, 0.929412, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.431892, 0.8091, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("5_4fxv7")
 theme_override_font_sizes/font_size = 56
 text = "5th"
 
 [node name="FifthScore" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer5/HBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.678431, 0.929412, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.431892, 0.8091, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("5_4fxv7")
 theme_override_font_sizes/font_size = 56
 text = " 0000"
+horizontal_alignment = 2
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer3/Submit Button" to="." method="_on_submit_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer4/Menu Button" to="." method="_on_menu_button_pressed"]
