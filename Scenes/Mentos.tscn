@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bjs70vrh504is"]
+[gd_scene load_steps=12 format=3 uid="uid://bjs70vrh504is"]
 
 [ext_resource type="Texture2D" uid="uid://dn5plkeb0vr7" path="res://Sprites/Mentos/Mentobackground.png" id="1_3mnn4"]
-[ext_resource type="Script" path="res://Scenes/mentos.gd" id="1_fis2a"]
+[ext_resource type="Script" path="res://mentos.gd" id="1_fis2a"]
 [ext_resource type="Texture2D" uid="uid://cc2okopurv226" path="res://Sprites/Mentos/Mentoconk.png" id="2_fnfic"]
+[ext_resource type="PackedScene" uid="uid://3jx3bsvdpka7" path="res://Scenes/Timer.tscn" id="2_rej2y"]
 [ext_resource type="Texture2D" uid="uid://bbrx223glx7x1" path="res://Sprites/Mentos/mentoarm.png" id="4_i6son"]
-[ext_resource type="Script" path="res://Scenes/MentoHand.gd" id="5_5i0ap"]
+[ext_resource type="Script" path="res://MentoHand.gd" id="5_5i0ap"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y7pa2"]
 radius = 4.28126
@@ -79,6 +80,20 @@ _data = {
 [node name="Mentos" type="Node2D"]
 script = ExtResource("1_fis2a")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Timer" parent="CanvasLayer" instance=ExtResource("2_rej2y")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+timeToPlay = 10
+
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
@@ -111,3 +126,5 @@ script = ExtResource("5_5i0ap")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(1001, 751)
+
+[connection signal="timeDone" from="CanvasLayer/Timer" to="." method="_on_timer_time_done"]

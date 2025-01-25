@@ -7,6 +7,8 @@ const CONK_SPLODE_TEXTURE = preload("res://Sprites/Mentos/Mentoconksplode.png")
 @export var numOfMints = 4
 var MintArray : Array[Mint]
 var mintsInBottle = 0
+
+var success : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for i in range(0,numOfMints):
@@ -32,7 +34,7 @@ func _process(delta: float) -> void:
 		$Conk.texture = CONK_SPLODE_TEXTURE
 		$Conk.position.y = 475
 		$Conk/AnimationPlayer.play("splode")
-		
+		success = true
 	pass
 
 func _on_mint_dropped():
@@ -43,3 +45,11 @@ func _on_mint_dropped():
 	MintArray.erase(MintArray.back())
 	if is_instance_valid(MintArray.back()):
 		MintArray.back()._set_is_top(true)
+
+
+func _on_timer_time_done() -> void:
+	if success:
+		print("you win")
+	else:
+		print ("you lose")
+	pass # Replace with function body.
