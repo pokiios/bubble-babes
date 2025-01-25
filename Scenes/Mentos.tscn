@@ -1,0 +1,130 @@
+[gd_scene load_steps=12 format=3 uid="uid://bjs70vrh504is"]
+
+[ext_resource type="Texture2D" uid="uid://dn5plkeb0vr7" path="res://Sprites/Mentos/Mentobackground.png" id="1_3mnn4"]
+[ext_resource type="Script" path="res://mentos.gd" id="1_fis2a"]
+[ext_resource type="Texture2D" uid="uid://cc2okopurv226" path="res://Sprites/Mentos/Mentoconk.png" id="2_fnfic"]
+[ext_resource type="PackedScene" uid="uid://3jx3bsvdpka7" path="res://Scenes/Timer.tscn" id="2_rej2y"]
+[ext_resource type="Texture2D" uid="uid://bbrx223glx7x1" path="res://Sprites/Mentos/mentoarm.png" id="4_i6son"]
+[ext_resource type="Script" path="res://MentoHand.gd" id="5_5i0ap"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y7pa2"]
+radius = 4.28126
+height = 9.04491
+
+[sub_resource type="Animation" id="Animation_6btx4"]
+resource_name = "MentoAdded"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.366667, 0.533333, 0.766667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 1), Vector2(1, 0.7), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_i8vap"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_vuyta"]
+resource_name = "splode"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.349066, 0.0, -0.349066]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lts7r"]
+_data = {
+"MentoAdded": SubResource("Animation_6btx4"),
+"RESET": SubResource("Animation_i8vap"),
+"splode": SubResource("Animation_vuyta")
+}
+
+[node name="Mentos" type="Node2D"]
+script = ExtResource("1_fis2a")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Timer" parent="CanvasLayer" instance=ExtResource("2_rej2y")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+timeToPlay = 10
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("1_3mnn4")
+
+[node name="Conk" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(298, 613)
+texture = ExtResource("2_fnfic")
+
+[node name="Area2D" type="Area2D" parent="Conk" groups=["conk"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Conk/Area2D"]
+position = Vector2(1, -190)
+scale = Vector2(16.5839, 36.2491)
+shape = SubResource("CapsuleShape2D_y7pa2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Conk"]
+libraries = {
+"": SubResource("AnimationLibrary_lts7r")
+}
+
+[node name="Hand" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(550, 595)
+texture = ExtResource("4_i6son")
+offset = Vector2(50, 400)
+script = ExtResource("5_5i0ap")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(1001, 751)
+
+[connection signal="timeDone" from="CanvasLayer/Timer" to="." method="_on_timer_time_done"]
