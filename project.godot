@@ -18,4 +18,5 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=1280
 window/size/viewport_height=960
+window/size/resizable=false
 window/size/borderless=true

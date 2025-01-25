@@ -1,0 +1,154 @@
+[gd_scene load_steps=20 format=3 uid="uid://dpy0ovgeahftq"]
+
+[ext_resource type="Shader" path="res://MainMenu.gdshader" id="1_5mvky"]
+[ext_resource type="Texture2D" uid="uid://c5fba5a6puj1i" path="res://Sprites/Main Menu/Bubble Babes.png" id="1_evynn"]
+[ext_resource type="Texture2D" uid="uid://dvd2ycb5wrl66" path="res://Sprites/Main Menu/bubblebabe sticker.png" id="2_v77qr"]
+[ext_resource type="Shader" path="res://Bounce.gdshader" id="3_axnjk"]
+[ext_resource type="Shader" path="res://grain.gdshader" id="4_frpt5"]
+[ext_resource type="Shader" path="res://highlight.gdshader" id="4_l0tiq"]
+[ext_resource type="Texture2D" uid="uid://d3itbxjer2w1x" path="res://Sprites/Main Menu/halftone.png" id="6_g4kua"]
+[ext_resource type="Texture2D" uid="uid://ddgl2d6nib0dd" path="res://Sprites/Main Menu/start heart- 24 January 2025 at 21.04.35.png" id="7_1gcmt"]
+[ext_resource type="Texture2D" uid="uid://ddw2joe5hqbdy" path="res://Sprites/Main Menu/heartstartinvert.png" id="8_owtcy"]
+[ext_resource type="Texture2D" uid="uid://didkj6jy6eop4" path="res://Sprites/Main Menu/heartstartblue.png" id="9_mdofb"]
+[ext_resource type="Texture2D" uid="uid://ykqn4uyk1d6j" path="res://Sprites/Main Menu/x.png" id="10_jkno4"]
+[ext_resource type="Texture2D" uid="uid://dtxp5yqy76qcp" path="res://Sprites/Main Menu/x (2).png" id="11_lx0ny"]
+[ext_resource type="Texture2D" uid="uid://cscr166011xld" path="res://Sprites/Main Menu/x (1).png" id="12_vclds"]
+[ext_resource type="Script" path="res://mainmenu.gd" id="13_qqt7o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jv84t"]
+shader = ExtResource("1_5mvky")
+shader_parameter/scroll_speed = 0.035
+shader_parameter/angle_degrees = 45.0
+shader_parameter/repeat_x = 7.0
+shader_parameter/repeat_y = 5.0
+shader_parameter/row_offset = 0.697
+shader_parameter/texture_to_scroll = ExtResource("2_v77qr")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_0akh7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i0n7b"]
+shader = ExtResource("3_axnjk")
+shader_parameter/do_abs = false
+shader_parameter/do_quantize = false
+shader_parameter/quantize_to = 1.0
+shader_parameter/sine_amplitude = Vector2(2, 10)
+shader_parameter/sine_speed = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lruqs"]
+shader = ExtResource("4_l0tiq")
+shader_parameter/Line_Smoothness = 0.045
+shader_parameter/Line_Width = 0.06
+shader_parameter/Brightness = 3.0
+shader_parameter/Rotation_deg = 30.0
+shader_parameter/Distortion = 1.8
+shader_parameter/Speed = 0.4
+shader_parameter/Position = 0.0
+shader_parameter/Position_Min = 0.25
+shader_parameter/Position_Max = 0.5
+shader_parameter/Alpha = 0.7
+shader_parameter/surface = ExtResource("1_evynn")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_av61w"]
+shader = ExtResource("4_frpt5")
+shader_parameter/grain_amount = 0.05
+shader_parameter/grain_size = 1.0
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.92549, 0.678431, 0.929412, 1)
+
+[node name="TextureRect2" type="TextureRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_g4kua")
+expand_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect"]
+material = SubResource("ShaderMaterial_jv84t")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_0akh7")
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.92549, 0.678431, 0.929412, 0.345098)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Logo" type="TextureRect" parent="ColorRect/MarginContainer/VBoxContainer"]
+material = SubResource("ShaderMaterial_i0n7b")
+layout_mode = 2
+texture = ExtResource("1_evynn")
+
+[node name="Shine" type="ColorRect" parent="ColorRect/MarginContainer/VBoxContainer/Logo"]
+material = SubResource("ShaderMaterial_lruqs")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Play" type="TextureButton" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("7_1gcmt")
+texture_pressed = ExtResource("8_owtcy")
+texture_hover = ExtResource("9_mdofb")
+
+[node name="Quit" type="TextureButton" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture_normal = ExtResource("10_jkno4")
+texture_pressed = ExtResource("11_lx0ny")
+texture_hover = ExtResource("12_vclds")
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("13_qqt7o")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_av61w")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="pressed" from="ColorRect/MarginContainer/Quit" to="Node2D" method="_on_quit_pressed"]
