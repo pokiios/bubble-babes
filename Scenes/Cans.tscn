@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://dulowrcksv4mf"]
+
+[ext_resource type="PackedScene" uid="uid://3jx3bsvdpka7" path="res://Scenes/Timer.tscn" id="1_5jwfv"]
+[ext_resource type="Script" path="res://Scenes/cans.gd" id="1_n4kri"]
+[ext_resource type="Texture2D" uid="uid://de4hbrn0f16ni" path="res://Assets/Shake the Can/shake-the-can-background.png" id="2_1wgq8"]
+[ext_resource type="PackedScene" uid="uid://cfq6qpqhcj8vw" path="res://Scenes/conk_can.tscn" id="3_tfbxa"]
+[ext_resource type="Texture2D" uid="uid://ccbmby5kns7uo" path="res://Assets/Shake the Can/arm-empty.png" id="4_w2wbx"]
+[ext_resource type="Script" path="res://MentoHand.gd" id="5_c1slh"]
+
+[node name="Cans" type="Node2D"]
+script = ExtResource("1_n4kri")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LevelTimer" parent="CanvasLayer" instance=ExtResource("1_5jwfv")]
+timeToPlay = 10
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 960.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_1wgq8")
+
+[node name="Conk_1" parent="." instance=ExtResource("3_tfbxa")]
+position = Vector2(375, 494)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(-105, 354)
+texture = ExtResource("4_w2wbx")
+offset = Vector2(-500, -125)
+script = ExtResource("5_c1slh")
+
+[node name="Conk_2" parent="." instance=ExtResource("3_tfbxa")]
+position = Vector2(675, 525)
+
+[node name="Conk_3" parent="." instance=ExtResource("3_tfbxa")]
+position = Vector2(990, 512)
+
+[connection signal="timeDone" from="CanvasLayer/LevelTimer" to="." method="_on_level_timer_time_done"]
