@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cykryui455c8h"
-path="res://.godot/imported/transitional-background.png-ad4ca63aad445d37ca309f223da8dc83.ctex"
+uid="uid://b27fmnhxe3yqf"
+path="res://.godot/imported/transition_neutral_0002.png-83f81b697701d065bf22cc2802fdfe5f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Transition/transitional-background.png"
-dest_files=["res://.godot/imported/transitional-background.png-ad4ca63aad445d37ca309f223da8dc83.ctex"]
+source_file="res://Assets/Transition/Neutral/transition_neutral_0002.png"
+dest_files=["res://.godot/imported/transition_neutral_0002.png-83f81b697701d065bf22cc2802fdfe5f.ctex"]
 
 [params]
 
