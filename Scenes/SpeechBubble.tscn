@@ -56,7 +56,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_wukbn"]
 resource_name = "fade_gray"
-length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -64,8 +63,8 @@ tracks/0/path = NodePath("GrayScale:material:shader_parameter/gray_a")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(0.392292, 2.82843),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.392292, 1.62451),
 "update": 0,
 "values": [0.0, 1.0]
 }
@@ -90,7 +89,7 @@ stream = SubResource("AudioStreamMicrophone_fdbc1")
 autoplay = true
 bus = &"Record"
 script = ExtResource("1_fauk2")
-success_increments = 0.01
+success_increments = 0.02
 threshhold = -10
 levels = 1
 

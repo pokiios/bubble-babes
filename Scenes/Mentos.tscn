@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bjs70vrh504is"]
+[gd_scene load_steps=17 format=3 uid="uid://bjs70vrh504is"]
 
 [ext_resource type="Texture2D" uid="uid://dn5plkeb0vr7" path="res://Sprites/Mentos/Mentobackground.png" id="1_3mnn4"]
 [ext_resource type="Script" path="res://mentos.gd" id="1_fis2a"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://3jx3bsvdpka7" path="res://Scenes/Timer.tscn" id="2_rej2y"]
 [ext_resource type="Texture2D" uid="uid://bbrx223glx7x1" path="res://Sprites/Mentos/mentoarm.png" id="4_i6son"]
 [ext_resource type="Script" path="res://MentoHand.gd" id="5_5i0ap"]
+[ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="7_dk3xm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y7pa2"]
 radius = 4.28126
@@ -77,6 +78,70 @@ _data = {
 "splode": SubResource("Animation_vuyta")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ej8ie"]
+shader = ExtResource("7_dk3xm")
+shader_parameter/gray_a = 0.0
+
+[sub_resource type="Animation" id="Animation_7u6pq"]
+resource_name = "fade_to_gray"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrayScale:material:shader_parameter/gray_a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.378929, 2.07053),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GrayScale:mouse_filter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_q4f42"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrayScale:material:shader_parameter/gray_a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GrayScale:mouse_filter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_et762"]
+_data = {
+"RESET": SubResource("Animation_q4f42"),
+"fade_to_gray": SubResource("Animation_7u6pq")
+}
+
 [node name="Mentos" type="Node2D"]
 script = ExtResource("1_fis2a")
 
@@ -126,5 +191,17 @@ script = ExtResource("5_5i0ap")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(1001, 751)
+
+[node name="GrayScale" type="ColorRect" parent="."]
+z_index = 4
+material = SubResource("ShaderMaterial_ej8ie")
+offset_right = 1280.0
+offset_bottom = 960.0
+mouse_filter = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_et762")
+}
 
 [connection signal="timeDone" from="CanvasLayer/Timer" to="." method="_on_timer_time_done"]

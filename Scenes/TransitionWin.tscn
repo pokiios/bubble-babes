@@ -1,0 +1,133 @@
+[gd_scene load_steps=15 format=3 uid="uid://dodrif2kxvgf4"]
+
+[ext_resource type="Script" path="res://Scripts/Levels/TransitionWin.gd" id="1_eligk"]
+[ext_resource type="Texture2D" uid="uid://cgnjq05i3hprj" path="res://Assets/Transition/Win/transition_win_0000.png" id="1_yokf8"]
+[ext_resource type="Texture2D" uid="uid://blo2bw6diqkro" path="res://Assets/Transition/Win/transition_win_0001.png" id="2_wm1gp"]
+[ext_resource type="Texture2D" uid="uid://bt10y0hgq01va" path="res://Assets/Transition/Win/transition_win_0002.png" id="3_060av"]
+[ext_resource type="Texture2D" uid="uid://u1n585lsi2fo" path="res://Assets/Transition/Win/transition_win_0003.png" id="4_owny3"]
+[ext_resource type="Texture2D" uid="uid://dp27pma50hqa2" path="res://Assets/Transition/Win/transition_win_0004.png" id="5_jdx6x"]
+[ext_resource type="Texture2D" uid="uid://be15jjgdna2uc" path="res://Assets/Transition/Win/transition_win_0005.png" id="6_eui37"]
+[ext_resource type="Shader" path="res://Shaders/grain.gdshader" id="8_p8vnf"]
+[ext_resource type="FontFile" uid="uid://c4041rmkmpuiq" path="res://Fonts/PLANK___.TTF" id="9_jhyrh"]
+[ext_resource type="FontFile" uid="uid://dohjlwv7dn6k7" path="res://Fonts/Excelorate-Font.otf" id="10_p8v65"]
+
+[sub_resource type="Animation" id="Animation_gf8h4"]
+resource_name = "yipee"
+length = 1.50003
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_yokf8"), ExtResource("2_wm1gp"), ExtResource("3_060av"), ExtResource("4_owny3"), ExtResource("5_jdx6x"), ExtResource("6_eui37")]
+}
+
+[sub_resource type="Animation" id="Animation_w2jyc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_yokf8")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2b65c"]
+_data = {
+"RESET": SubResource("Animation_w2jyc"),
+"yipee": SubResource("Animation_gf8h4")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qv04u"]
+shader = ExtResource("8_p8vnf")
+shader_parameter/grain_amount = 0.03
+shader_parameter/grain_size = 1.5
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eligk")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_yokf8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2b65c")
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_qv04u")
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 960.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 50
+
+[node name="Marker1" type="Marker2D" parent="CanvasLayer/MarginContainer"]
+position = Vector2(160, 750)
+
+[node name="Marker2" type="Marker2D" parent="CanvasLayer/MarginContainer"]
+position = Vector2(480, 750)
+
+[node name="Marker3" type="Marker2D" parent="CanvasLayer/MarginContainer"]
+position = Vector2(800, 750)
+
+[node name="Marker4" type="Marker2D" parent="CanvasLayer/MarginContainer"]
+position = Vector2(1120, 750)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_outline_color = Color(0, 0.498039, 1, 1)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("9_jhyrh")
+theme_override_font_sizes/font_size = 100
+text = "Label
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_outline_color = Color(0, 0.498039, 1, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("10_p8v65")
+theme_override_font_sizes/font_size = 50
+text = "Score"
+vertical_alignment = 2
+
+[node name="Timer" type="Timer" parent="."]

@@ -11,6 +11,7 @@ var mintsInBottle = 0
 var success : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	for i in range(0,numOfMints):
 		var tempMint = Mint.new()
 		tempMint.position = spawnpoint
@@ -48,8 +49,11 @@ func _on_mint_dropped():
 
 
 func _on_timer_time_done() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if success:
 		print("you win")
 	else:
+		
 		print ("you lose")
+		$AnimationPlayer.play("fade_to_gray")
 	pass # Replace with function body.
