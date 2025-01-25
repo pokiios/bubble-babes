@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://cfq6qpqhcj8vw"]
+
+[ext_resource type="Texture2D" uid="uid://drtoyidutp7p8" path="res://Assets/Shake the Can/conka-conka-can.png" id="1_5858x"]
+[ext_resource type="Script" path="res://Scenes/conkCan.gd" id="2_y124r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rfavi"]
+size = Vector2(231, 442)
+
+[sub_resource type="Animation" id="Animation_addys"]
+resource_name = "canshake"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.349066, 0.0, -0.349066]
+}
+
+[sub_resource type="Animation" id="Animation_anced"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r5gcw"]
+_data = {
+"RESET": SubResource("Animation_anced"),
+"canshake": SubResource("Animation_addys")
+}
+
+[node name="Conk_1" type="Sprite2D"]
+texture = ExtResource("1_5858x")
+script = ExtResource("2_y124r")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-6, 98)
+shape = SubResource("RectangleShape2D_rfavi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_r5gcw")
+}
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
