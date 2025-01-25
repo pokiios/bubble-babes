@@ -1,0 +1,85 @@
+[gd_scene load_steps=9 format=3 uid="uid://bgf7kas065jrb"]
+
+[ext_resource type="Texture2D" uid="uid://c1xb8mhb0eugf" path="res://Sprites/Rap/Bubble Rap Background.png" id="1_tqba5"]
+[ext_resource type="Script" path="res://Scenes/bubble_rap.gd" id="1_u8chl"]
+[ext_resource type="Texture2D" uid="uid://camppyxnicl1l" path="res://Assets/Bubbles/bubble_1.png" id="2_qa01t"]
+[ext_resource type="FontFile" uid="uid://c4041rmkmpuiq" path="res://Fonts/PLANK___.TTF" id="2_se2a3"]
+[ext_resource type="Texture2D" uid="uid://dydm4h6an2tqe" path="res://Assets/Bubbles/bubble_2.png" id="3_qm73f"]
+[ext_resource type="Texture2D" uid="uid://r56yhj3jnwe7" path="res://Assets/Bubbles/bubble_3.png" id="4_isn8i"]
+[ext_resource type="Texture2D" uid="uid://brii0m6y2rf4r" path="res://Assets/Bubbles/bubble_4.png" id="5_kwcnu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ynr1k"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_u8chl")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_tqba5")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 437.0
+offset_top = 12.0
+offset_right = 847.0
+offset_bottom = 179.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.490196, 0.27451, 0.745098, 1)
+theme_override_constants/shadow_outline_size = 25
+theme_override_fonts/font = ExtResource("2_se2a3")
+theme_override_font_sizes/font_size = 101
+text = "LYRICS"
+
+[node name="RapBubble1" type="Sprite2D" parent="."]
+position = Vector2(916, 823)
+texture = ExtResource("2_qa01t")
+
+[node name="RapBubbleCollision1" type="Area2D" parent="RapBubble1"]
+visible = false
+
+[node name="RapBubbleCollisionShape1" type="CollisionShape2D" parent="RapBubble1/RapBubbleCollision1"]
+visible = false
+scale = Vector2(12, 12)
+shape = SubResource("CircleShape2D_ynr1k")
+
+[node name="RapBubble2" type="Sprite2D" parent="."]
+position = Vector2(1104, 155)
+texture = ExtResource("3_qm73f")
+
+[node name="RapBubbleCollision2" type="Area2D" parent="RapBubble2"]
+visible = false
+
+[node name="RapBubbleCollisionShape2" type="CollisionShape2D" parent="RapBubble2/RapBubbleCollision2"]
+visible = false
+scale = Vector2(12, 12)
+shape = SubResource("CircleShape2D_ynr1k")
+
+[node name="RapBubble3" type="Sprite2D" parent="."]
+position = Vector2(1070, 426)
+texture = ExtResource("4_isn8i")
+
+[node name="RapBubbleCollision3" type="Area2D" parent="RapBubble3"]
+visible = false
+
+[node name="RapBubbleCollisionShape3" type="CollisionShape2D" parent="RapBubble3/RapBubbleCollision3"]
+visible = false
+scale = Vector2(12, 12)
+shape = SubResource("CircleShape2D_ynr1k")
+
+[node name="RapBubble4" type="Sprite2D" parent="."]
+position = Vector2(1135, 674)
+texture = ExtResource("5_kwcnu")
+
+[node name="RapBubbleCollision4" type="Area2D" parent="RapBubble4"]
+visible = false
+
+[node name="RapBubbleCollisionShape4" type="CollisionShape2D" parent="RapBubble4/RapBubbleCollision4"]
+visible = false
+scale = Vector2(12, 12)
+shape = SubResource("CircleShape2D_ynr1k")
+
+[connection signal="mouse_entered" from="RapBubble1/RapBubbleCollision1" to="." method="_on_rap_bubble_collision_1_mouse_entered"]
+[connection signal="mouse_exited" from="RapBubble1/RapBubbleCollision1" to="." method="_on_rap_bubble_collision_1_mouse_exited"]
+[connection signal="mouse_entered" from="RapBubble2/RapBubbleCollision2" to="." method="_on_rap_bubble_collision_2_mouse_entered"]
+[connection signal="mouse_entered" from="RapBubble3/RapBubbleCollision3" to="." method="_on_rap_bubble_collision_3_mouse_entered"]
+[connection signal="mouse_entered" from="RapBubble4/RapBubbleCollision4" to="." method="_on_rap_bubble_collision_4_mouse_entered"]
