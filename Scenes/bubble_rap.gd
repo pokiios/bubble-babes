@@ -19,11 +19,13 @@ var rapStartPos = [0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48]
 var rapPos = 0
 var currentLyric = ""
 
-
+signal win
+signal lose
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	lyric.text = currentLyric
+	$AnimationPlayer.stop(true)
 	
 	#Randomise lyrics
 	var randRap = rng.randi_range(0, rapStartPos.size()-1)
@@ -48,7 +50,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if currentBubble > 4:
+		win.emit()
 
 func _input(event):
 	if bubbleHover1 && Input.is_action_just_pressed("click") && currentBubble == 1:
@@ -74,6 +77,7 @@ func _input(event):
 	if bubbleHover4 && Input.is_action_just_pressed("click") && currentBubble == 4:
 		rapBubble4.hide()
 		currentLyric = rapLyrics[rapPos]
+		currentBubble += 1
 		$AnimationPlayer.stop(true)
 		$AnimationPlayer.play("fade_text")
 	lyric.text = currentLyric
@@ -105,3 +109,4 @@ func _on_rap_bubble_collision_4_mouse_exited() -> void:
 func _on_level_timer_time_done() -> void:
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	print("loser loser")
+	lose.emit()

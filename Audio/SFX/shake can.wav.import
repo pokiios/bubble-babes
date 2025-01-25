@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dhtqj8e7iedpi"
+path="res://.godot/imported/shake can.wav-66019e3f4ec3ee805ebb996fe5a6e8e1.sample"
+
+[deps]
+
+source_file="res://Audio/SFX/shake can.wav"
+dest_files=["res://.godot/imported/shake can.wav-66019e3f4ec3ee805ebb996fe5a6e8e1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -9,9 +9,14 @@ var MintArray : Array[Mint]
 var mintsInBottle = 0
 
 var success : bool = false
+
+signal win
+signal lose
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	$AnimationPlayer.stop(true)
+	
 	for i in range(0,numOfMints):
 		var tempMint = Mint.new()
 		tempMint.position = spawnpoint
@@ -44,7 +49,7 @@ func _on_mint_dropped():
 		$Conk/AnimationPlayer.play("MentoAdded")
 	remove_child(MintArray.back())
 	MintArray.erase(MintArray.back())
-	if is_instance_valid(MintArray.back()):
+	if MintArray.size() > 0:
 		MintArray.back()._set_is_top(true)
 
 
@@ -52,8 +57,15 @@ func _on_timer_time_done() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if success:
 		print("you win")
+		win.emit()
 	else:
 		
 		print ("you lose")
 		$AnimationPlayer.play("fade_to_gray")
+	pass # Replace with function body.
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	$AnimationPlayer.play("RESET")
+	lose.emit()
 	pass # Replace with function body.

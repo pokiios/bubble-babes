@@ -1,32 +1,51 @@
 extends Control
 
-@onready var scoreFile = "user://HighScores.txt"
-@onready var file
-@onready var NameBox = $"MarginContainer/HBoxContainer/VBoxContainer/MarginContainer2/Enter Name"
-@onready var FirstText = $MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer/HBoxContainer/FirstName
-@onready var SecondText = $MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer2/HBoxContainer/SecondName
-@onready var ThirdText = $MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer3/HBoxContainer/ThirdName
-@onready var FourthText = $MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer4/HBoxContainer/FourthName
-@onready var FifthText = $MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer5/HBoxContainer/FifthName
-@onready var FirstScore = $MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer/HBoxContainer/FirstScore
-@onready var SecondScore = $MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer2/HBoxContainer/SecondScore
-@onready var ThirdScore = $MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer3/HBoxContainer/ThirdScore
-@onready var FourthScore = $MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer4/HBoxContainer/FourthScore
-@onready var FifthScore = $MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer5/HBoxContainer/FifthScore
+#@onready 
+var file
+var NameBox 
+var FirstText
+var SecondText
+var ThirdText 
+var FourthText 
+var FifthText 
+var FirstScore
+var SecondScore 
+var ThirdScore 
+var FourthScore 
+var FifthScore
 var scoresArray:Array
-var currentScore = 13
+var currentScore = 0
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+signal Menu
+
+func _leaderboard_init(Score):
 	#If file does not exist; create one
+	var scoreFile = "user://HighScores.txt"
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+	NameBox = $"CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer2/Enter Name"
+	FirstText = $CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer/HBoxContainer/FirstName
+	SecondText = $CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer2/HBoxContainer/SecondName
+	ThirdText = $CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer3/HBoxContainer/ThirdName
+	FourthText = $CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer4/HBoxContainer/FourthName
+	FifthText = $CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer5/HBoxContainer/FifthName
+	FirstScore = $CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer/HBoxContainer/FirstScore
+	SecondScore = $CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer2/HBoxContainer/SecondScore
+	ThirdScore = $CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer3/HBoxContainer/ThirdScore
+	FourthScore = $CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer4/HBoxContainer/FourthScore
+	FifthScore = $CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer5/HBoxContainer/FifthScore
+
 	if !FileAccess.file_exists(scoreFile):
 		file = FileAccess.open(scoreFile, FileAccess.WRITE_READ) # WRITE_READ creates file if it doesn't exist
 	#If file does exist; open for reading
 	else:
 		file = FileAccess.open(scoreFile, FileAccess.READ_WRITE) # READ_WRITE is weak sauce and cannot create life
-	
+	currentScore = Score
 	_sort_scores()
 	_update_displayed_scores()
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass
 
 func _sort_scores():
 	#Read file text and set it to a variable
@@ -80,7 +99,8 @@ func _process(delta: float) -> void:
 
 # MENU BUTTON
 func _on_menu_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn")
+	#get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn")
+	Menu.emit()
 
 # SUBMIT BUTTON
 func _on_submit_button_pressed() -> void:

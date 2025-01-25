@@ -7,8 +7,12 @@ signal transition_finished
 
 func transition_init(random_int : int, lives : int) -> void:
 	$CanvasLayer/MarginContainer/Label.text = instructions_array[random_int]
-
-	for i in lives:
+	lives_position_array.push_back($CanvasLayer/MarginContainer/Marker1)
+	lives_position_array.push_back($CanvasLayer/MarginContainer/Marker2)
+	lives_position_array.push_back($CanvasLayer/MarginContainer/Marker3)
+	lives_position_array.push_back($CanvasLayer/MarginContainer/Marker4)
+	
+	for i in range(lives):
 		var temp = Sprite2D.new()
 		temp.texture = load("res://Sprites/Transitions/heartlife sticker.png")
 		temp.scale = Vector2(.75, .75)
@@ -18,12 +22,9 @@ func transition_init(random_int : int, lives : int) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	lives_position_array.push_back($CanvasLayer/MarginContainer/Marker1)
-	lives_position_array.push_back($CanvasLayer/MarginContainer/Marker2)
-	lives_position_array.push_back($CanvasLayer/MarginContainer/Marker3)
-	lives_position_array.push_back($CanvasLayer/MarginContainer/Marker4)
 	
-	transition_init(2,2)
+	
+	#transition_init(2,2)
 	$Timer.start()
 	$AnimationPlayer.play("yapping")
 	

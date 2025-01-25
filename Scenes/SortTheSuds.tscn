@@ -125,7 +125,6 @@ texture = ExtResource("4_hilax")
 
 [node name="SudCollision2" type="Area2D" parent="Sud2"]
 position = Vector2(-542.454, -266.944)
-scale = Vector2(1, 1)
 
 [node name="SudCollisionShape2" type="CollisionShape2D" parent="Sud2/SudCollision2"]
 position = Vector2(542.454, 261.234)
@@ -139,7 +138,6 @@ texture = ExtResource("4_hilax")
 
 [node name="SudCollision3" type="Area2D" parent="Sud3"]
 position = Vector2(-99.9257, -368.297)
-scale = Vector2(1, 1)
 
 [node name="SudCollisionShape3" type="CollisionShape2D" parent="Sud3/SudCollision3"]
 position = Vector2(102.781, 364.015)
@@ -172,3 +170,4 @@ mouse_filter = 2
 [connection signal="mouse_exited" from="Sud2/SudCollision2" to="." method="_on_sud_collision_2_mouse_exited"]
 [connection signal="mouse_entered" from="Sud3/SudCollision3" to="." method="_on_sud_collision_3_mouse_entered"]
 [connection signal="mouse_exited" from="Sud3/SudCollision3" to="." method="_on_sud_collision_3_mouse_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -1,6 +1,6 @@
 extends Node2D
 
-var lose = false
+var losing = false
 var plateHovered = false
 var globalSudHover = false
 var sudHovered1 = false
@@ -13,14 +13,19 @@ var brokenTexture = load("res://Sprites/Suds/sudsBrockenPlate.png")
 @onready var sud2 = $Sud2
 @onready var sud3 = $Sud3
 
+signal win
+signal lose
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	$AnimationPlayer.stop(true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if !sud1.visible && !sud2.visible && !sud3.visible && !lose:
+	if !sud1.visible && !sud2.visible && !sud3.visible && !losing:
 		print("winner winner")
+		win.emit()
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -29,8 +34,8 @@ func _input(event):
 		elif event.button_index == 1 and not event.is_pressed():
 			mouse_left_down = false
 	
-	if plateHovered && Input.is_action_just_pressed("click") && !globalSudHover && !lose:
-		lose = true
+	if plateHovered && Input.is_action_just_pressed("click") && !globalSudHover && !losing:
+		losing = true
 		plate.texture = brokenTexture
 		sud1.hide()
 		sud2.hide()
@@ -84,3 +89,10 @@ func _on_level_timer_time_done() -> void:
 	$AnimationPlayer.play("fade_gray")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	print("loser loser")
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	$AnimationPlayer.play("RESET")
+
+	lose.emit()
+	pass # Replace with function body.

@@ -10,7 +10,8 @@ signal level_complete
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$"../Bubble".visible = false
+	if levels == 0:
+		$"../Bubble".visible = false
 	success_percent = 0.0
 	ProjectSettings.set_setting("audio/driver/enable_input", true)
 	

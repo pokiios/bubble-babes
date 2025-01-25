@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://clm06fge0217e"
+path="res://.godot/imported/mento splash 3.wav-328cda1dff879fffafae92ce4727f979.sample"
+
+[deps]
+
+source_file="res://Audio/SFX/mento splash 3.wav"
+dest_files=["res://.godot/imported/mento splash 3.wav-328cda1dff879fffafae92ce4727f979.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
