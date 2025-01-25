@@ -24,7 +24,6 @@ func _process(_delta: float) -> void:
 # Gets db level of 
 func get_power():
 	var power = int(AudioServer.get_bus_peak_volume_left_db(AudioServer.get_bus_index("Record"), 0))
-	print(power)
 	return power
 
 func trigger_effect():
