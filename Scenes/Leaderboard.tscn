@@ -102,37 +102,70 @@ text = " 0000"
 layout_mode = 2
 theme_override_constants/margin_top = 105
 
-[node name="2nd" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="SecondName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer2/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 56
-text = "2nd - 0000"
+text = "2nd"
+
+[node name="SecondScore" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = " 0000"
 
 [node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_constants/margin_top = 105
 
-[node name="3rd" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer3"]
+layout_mode = 2
+
+[node name="ThirdName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer3/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 56
-text = "3rd - 0000"
+text = "3rd"
+
+[node name="ThirdScore" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer3/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = " 0000"
 
 [node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_constants/margin_top = 105
 
-[node name="4th" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer4"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer4"]
+layout_mode = 2
+
+[node name="FourthName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer4/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 56
-text = "4th - 0000"
+text = "4th"
+
+[node name="FourthScore" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer4/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = " 0000"
 
 [node name="MarginContainer5" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_constants/margin_top = 105
 
-[node name="5th" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer5"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer5"]
+layout_mode = 2
+
+[node name="FifthName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer5/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 56
-text = "5th - 0000"
+text = "5th"
+
+[node name="FifthScore" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer5/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = " 0000"
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer3/Submit Button" to="." method="_on_submit_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer4/Menu Button" to="." method="_on_menu_button_pressed"]
