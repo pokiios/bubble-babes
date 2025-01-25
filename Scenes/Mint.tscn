@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8t61h728v30n"]
+
+[ext_resource type="Script" path="res://mint.gd" id="2_3bm1f"]
+
+[node name="Mint" type="Node2D"]
+script = ExtResource("2_3bm1f")
