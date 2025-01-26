@@ -1,12 +1,41 @@
-[gd_scene load_steps=3 format=3 uid="uid://db7hchrkcdlcl"]
+[gd_scene load_steps=10 format=3 uid="uid://db7hchrkcdlcl"]
 
 [ext_resource type="Script" path="res://Scenes/state_machine.gd" id="1_yrvcf"]
 [ext_resource type="Script" path="res://Scenes/AudioManager.gd" id="2_tfx7g"]
+[ext_resource type="AudioStream" uid="uid://cakwfuplejl5b" path="res://Audio/Music/77199__spol__hip-hop-beat-loop7.wav" id="3_wmbwp"]
+[ext_resource type="AudioStream" uid="uid://bom70px4bdqv4" path="res://Audio/Music/88155__dave_girtsman__a-silly-vocal-tune.mp3" id="4_pw2v0"]
+[ext_resource type="AudioStream" uid="uid://2tls1obkrlfc" path="res://Audio/Music/179435__grendelithi__dance-beat.mp3" id="5_hh3lm"]
+[ext_resource type="AudioStream" uid="uid://cuutv0m3lqtnw" path="res://Audio/Music/388101__furbyguy__90s-game-loop.wav" id="6_yucjd"]
+[ext_resource type="AudioStream" uid="uid://0sy4mt6pdq16" path="res://Audio/Music/444398__zagi2__daft-funk.wav" id="7_l31dj"]
+[ext_resource type="AudioStream" uid="uid://dw472cs4ce2se" path="res://Audio/Music/563244__yellowtree__discofunk-loop-v2.wav" id="8_md6t6"]
+[ext_resource type="AudioStream" uid="uid://bvq3krd8i0gv5" path="res://Audio/Music/701562__ztidlen__popiasound-popgenre-2.mp3" id="9_ewgdk"]
 
 [node name="StateMachine" type="Node2D"]
 script = ExtResource("1_yrvcf")
 
 [node name="Node2D" type="Node2D" parent="."]
 script = ExtResource("2_tfx7g")
+
+[node name="HipHopAudioPlayer" type="AudioStreamPlayer2D" parent="Node2D"]
+stream = ExtResource("3_wmbwp")
+
+[node name="SillyVocalAudioPlayer" type="AudioStreamPlayer2D" parent="Node2D"]
+stream = ExtResource("4_pw2v0")
+
+[node name="DanceBeatAudioPlayer" type="AudioStreamPlayer2D" parent="Node2D"]
+stream = ExtResource("5_hh3lm")
+
+[node name="NinetiesAudioPlayer" type="AudioStreamPlayer2D" parent="Node2D"]
+stream = ExtResource("6_yucjd")
+
+[node name="DaftFunkAudioPlayer" type="AudioStreamPlayer2D" parent="Node2D"]
+stream = ExtResource("7_l31dj")
+
+[node name="DiscoFunkAudioPlayer" type="AudioStreamPlayer2D" parent="Node2D"]
+stream = ExtResource("8_md6t6")
+volume_db = 2.644
+
+[node name="PopGenreAudioPlayer" type="AudioStreamPlayer2D" parent="Node2D"]
+stream = ExtResource("9_ewgdk")
 
 [connection signal="ChangeAudio" from="." to="Node2D" method="_on_state_machine_change_audio"]
