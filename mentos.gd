@@ -12,6 +12,7 @@ var MintArray : Array[Mint]
 var mintsInBottle = 0
 
 var success : bool = false
+var soundPlayed : bool = false
 
 signal win
 signal lose
@@ -42,6 +43,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	
 	if mintsInBottle >= numOfMints:
+		if !soundPlayed:
+			$FizzPlayer.play()
+		soundPlayed = true
 		$Conk.texture = CONK_SPLODE_TEXTURE
 		$Conk.position.y = 475
 		$Conk/AnimationPlayer.play("splode")
@@ -49,6 +53,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_mint_dropped():
+	$MentoSplashPlayer.play()
 	mintsInBottle += 1
 	if mintsInBottle < numOfMints:
 		$Conk/AnimationPlayer.play("MentoAdded")

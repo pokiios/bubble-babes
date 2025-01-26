@@ -5,6 +5,7 @@ extends Node2D
 
 @onready var level_timer = $LevelTimer
 
+var PopSFXPlayer
 var level_completed : bool = false
 signal win
 signal lose
@@ -12,6 +13,7 @@ signal lose
 func _ready() -> void:
 	$Highlight.visible = false
 	mat.set_shader_parameter("gray_a", 0)
+	PopSFXPlayer = $PopSFXPlayer
 
 func _on_level_timer_time_done() -> void:
 	if !level_completed:

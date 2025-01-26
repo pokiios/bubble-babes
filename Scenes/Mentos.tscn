@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bjs70vrh504is"]
+[gd_scene load_steps=24 format=3 uid="uid://bjs70vrh504is"]
 
 [ext_resource type="Texture2D" uid="uid://dn5plkeb0vr7" path="res://Sprites/Mentos/Mentobackground.png" id="1_3mnn4"]
 [ext_resource type="Script" path="res://mentos.gd" id="1_fis2a"]
@@ -8,6 +8,10 @@
 [ext_resource type="Script" path="res://MentoHand.gd" id="5_5i0ap"]
 [ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="7_dk3xm"]
 [ext_resource type="Shader" path="res://Shaders/highlight.gdshader" id="8_q4n7r"]
+[ext_resource type="AudioStream" uid="uid://c5pihoj1am3p6" path="res://Audio/SFX/mento splash 1.wav" id="9_ceaa2"]
+[ext_resource type="AudioStream" uid="uid://ixu21sobi1q3" path="res://Audio/SFX/mento splash 2.wav" id="10_2potq"]
+[ext_resource type="AudioStream" uid="uid://clm06fge0217e" path="res://Audio/SFX/mento splash 3.wav" id="11_qkpjr"]
+[ext_resource type="AudioStream" uid="uid://kfqepdex4p43" path="res://Audio/SFX/can fizz.wav" id="12_eafp8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y7pa2"]
 radius = 4.28126
@@ -156,6 +160,12 @@ shader_parameter/Position_Min = 0.25
 shader_parameter/Position_Max = 0.5
 shader_parameter/Alpha = 1.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8ktuy"]
+streams_count = 3
+stream_0/stream = ExtResource("9_ceaa2")
+stream_1/stream = ExtResource("10_2potq")
+stream_2/stream = ExtResource("11_qkpjr")
+
 [node name="Mentos" type="Node2D"]
 script = ExtResource("1_fis2a")
 
@@ -227,6 +237,12 @@ offset_bottom = 960.0
 
 [node name="WinningTimer" type="Timer" parent="."]
 wait_time = 3.0
+
+[node name="MentoSplashPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_8ktuy")
+
+[node name="FizzPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_eafp8")
 
 [connection signal="timeDone" from="CanvasLayer/Timer" to="." method="_on_timer_time_done"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

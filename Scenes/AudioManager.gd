@@ -7,6 +7,10 @@ var NinetiesAudioPlayer
 var DaftFunkAudioPlayer
 var DiscoFunkAudioPlayer
 var PopGenreAudioPlayer
+var ElectronicRemixAudioPlayer
+var VictoryAudioPlayer
+var LoseAudioPlayer
+var AlienKickPlayer
 var NodeRef
 
 # Called when the node enters the scene tree for the first time.
@@ -18,6 +22,10 @@ func _ready() -> void:
 	DaftFunkAudioPlayer = $"DaftFunkAudioPlayer"
 	DiscoFunkAudioPlayer = $"DiscoFunkAudioPlayer"
 	PopGenreAudioPlayer = $"PopGenreAudioPlayer"
+	ElectronicRemixAudioPlayer = $ElectronicRemixAudioPlayer
+	VictoryAudioPlayer = $VictoryAudioPlayer
+	LoseAudioPlayer = $LoseAudioPlayer
+	AlienKickPlayer = $AlienKickPlayer
 	NodeRef = $"."
 	DiscoFunkAudioPlayer.play()
 
@@ -35,29 +43,43 @@ func _stop_all() -> void:
 	DaftFunkAudioPlayer.stop()
 	DiscoFunkAudioPlayer.stop()
 	PopGenreAudioPlayer.stop()
+	ElectronicRemixAudioPlayer.stop()
+	VictoryAudioPlayer.stop()
+	LoseAudioPlayer.stop()
+	AlienKickPlayer.stop()
 
 func _on_state_machine_change_audio(scene_name) -> void:
 	match scene_name:
 		"Menu":
-			pass
+			_stop_all()
+			DiscoFunkAudioPlayer.play()
 		"TransWin":
-			pass
+			_stop_all()
+			VictoryAudioPlayer.play()
 		"TransLose":
-			pass
+			_stop_all()
+			LoseAudioPlayer.play()
 		"TransNeutral":
-			pass
+			_stop_all()
+			AlienKickPlayer.play()
 		"LeaderBoard":
-			pass
+			_stop_all()
+			DanceBeatAudioPlayer.play()
 		"BubbleRap":
-			pass
+			_stop_all()
+			HipHopAudioPlayer.play()
 		"BubbleGumPop":
-			pass
+			_stop_all()
+			PopGenreAudioPlayer.play()
 		"Mentos":
-			pass
+			_stop_all()
+			ElectronicRemixAudioPlayer.play()
 		"Cans":
-			pass
-		"SortTheSuds":
 			_stop_all()
 			SillyVocalAudioPlayer.play()
+		"SortTheSuds":
+			_stop_all()
+			PopGenreAudioPlayer.play()
 		"Scream":
-			pass
+			_stop_all()
+			NinetiesAudioPlayer.play()
