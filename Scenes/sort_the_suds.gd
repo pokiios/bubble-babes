@@ -14,6 +14,8 @@ var brokenTexture = load("res://Sprites/Suds/sudsBrockenPlate.png")
 @onready var sud3 = $Sud3
 @onready var mat = $GrayScale.material
 
+@onready var level_timer = $LevelTimer
+
 
 signal win
 signal lose

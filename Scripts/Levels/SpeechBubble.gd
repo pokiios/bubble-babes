@@ -2,6 +2,8 @@ extends Node2D
 # Called when the node enters the scene tree for the first time
 var level_completed : bool = false
 @onready var mat : ShaderMaterial = $GrayScale.material
+@onready var level_timer = $LevelTimer
+
 
 signal lose
 signal win

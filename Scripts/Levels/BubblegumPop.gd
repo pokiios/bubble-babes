@@ -2,6 +2,9 @@ extends Node2D
 
 @onready var mat = $GrayScale.material
 @onready var bg : Sprite2D
+
+@onready var level_timer = $LevelTimer
+
 var level_completed : bool = false
 signal win
 signal lose

@@ -17,6 +17,8 @@ var PlayerLives : int = 4
 var RandomInt : int = 0
 var HighScore : String = ""
 var GameCount : int = 0
+var GameTime : int = 10
+var TransTime : int = 3
 
 var LastInt : int = 0
 var LastLastInt : int = 0
@@ -34,6 +36,7 @@ func _ready() -> void:
 	#If file does exist; open for reading
 	else:
 		file = FileAccess.open(scoreFile, FileAccess.READ_WRITE)
+		file.store_string("--,0000:--,0000:--,0000:--,0000:--,0000")
 		
 		
 	var readText = file.get_as_text()
@@ -87,6 +90,7 @@ func _start_game(menu):
 	RandomInt = randi_range(0,5)
 	
 	var tempTrans = TRANS_NEUTRAL.instantiate()
+	tempTrans.get_child(4).set_wait_time(TransTime)
 	tempTrans.transition_init(RandomInt, PlayerLives)
 	tempTrans.transition_finished.connect(_new_level.bind(tempTrans))
 	add_child(tempTrans)
@@ -98,14 +102,25 @@ func _switch_level(trans):
 	LastLastInt = LastInt
 	LastInt = RandomInt
 	
+	
+	
 	while RandomInt == LastInt or RandomInt == LastLastInt:
 		RandomInt = randi_range(0,5)
 	print(RandomInt)
 	
 	var tempTrans = TRANS_NEUTRAL.instantiate()
+	tempTrans.get_child(4).set_wait_time(TransTime)
+	if GameCount >= 7:
+		if GameTime > 3:
+			GameTime -= 1
+			tempTrans.speed_up = true
+		GameCount = 0
+	else:
+		tempTrans.speed_up = false
 	tempTrans.transition_init(RandomInt, PlayerLives)
 	tempTrans.transition_finished.connect(_new_level.bind(tempTrans))
 	add_child(tempTrans)
+
 	ChangeAudio.emit("TransNeutral")
 	
 func _level_won(level):
@@ -113,6 +128,7 @@ func _level_won(level):
 	level.queue_free()
 	
 	var tempTrans = TRANS_WIN.instantiate()
+	tempTrans.get_child(4).set_wait_time(TransTime)
 	tempTrans.transition_init(PlayerLives, PlayerScore)
 	tempTrans.transition_finished.connect(_switch_level.bind(tempTrans))
 	add_child(tempTrans)
@@ -133,6 +149,7 @@ func _level_lost(level):
 		#add_child() leaderboard
 	else:
 		var tempTrans = TRANS_LOSE.instantiate()
+		tempTrans.get_child(4).set_wait_time(TransTime)
 		tempTrans.transition_init(PlayerLives, PlayerScore)
 		tempTrans.transition_finished.connect(_switch_level.bind(tempTrans))
 		add_child(tempTrans)
@@ -170,11 +187,10 @@ func _new_level(trans):
 			next_level  = SPEECHBUBBLE_GAME.instantiate()
 			next_level_name = "Scream"
 			
-	#if GameCount >= 7:
-	#	next_level.time -= 1
-	#	GameCount = 0
+
 	next_level.win.connect(_level_won.bind(next_level))
 	next_level.lose.connect(_level_lost.bind(next_level))
+	next_level.level_timer.set_wait_time(GameTime)
 	add_child(next_level)
 	ChangeAudio.emit(next_level_name)
 	#next_level.win.connect(_level_won.bind(next_level))
