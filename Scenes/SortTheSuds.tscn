@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://de6q6h0tkqyhm"]
+[gd_scene load_steps=27 format=3 uid="uid://de6q6h0tkqyhm"]
 
 [ext_resource type="Script" path="res://Scenes/sort_the_suds.gd" id="1_3orje"]
 [ext_resource type="Texture2D" uid="uid://b72j03hdomixx" path="res://Sprites/Suds/sudsBackground.png" id="1_doq7f"]
@@ -9,6 +9,14 @@
 [ext_resource type="Script" path="res://MentoHand.gd" id="6_2vvo2"]
 [ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="8_xd727"]
 [ext_resource type="Shader" path="res://Shaders/highlight.gdshader" id="9_tag4s"]
+[ext_resource type="AudioStream" uid="uid://dkh6dg3cau5fu" path="res://Audio/SFX/bubble pop 1.wav" id="10_2hbv1"]
+[ext_resource type="AudioStream" uid="uid://do5g7x7sv5agn" path="res://Audio/SFX/bubble pop 2.wav" id="11_cxrqq"]
+[ext_resource type="AudioStream" uid="uid://b2efrhshlexbl" path="res://Audio/SFX/bubble pop 3.wav" id="12_2i48q"]
+[ext_resource type="AudioStream" uid="uid://c6xs5ppecbekc" path="res://Audio/SFX/bubble pop 4.wav" id="13_f36nm"]
+[ext_resource type="AudioStream" uid="uid://0u6jchw30q2k" path="res://Audio/SFX/bubble pop 5.wav" id="14_hh42m"]
+[ext_resource type="AudioStream" uid="uid://d3tvto33qwr6c" path="res://Audio/SFX/bubble pop 6.wav" id="15_6h53f"]
+[ext_resource type="AudioStream" uid="uid://ktlkxttmjl6v" path="res://Audio/SFX/bubble pop 7.wav" id="16_wncn5"]
+[ext_resource type="AudioStream" uid="uid://bwaf63vpk7lyb" path="res://Audio/SFX/plate smash.wav" id="17_3f7qj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4qq3x"]
 
@@ -83,6 +91,16 @@ shader_parameter/Position = 0.0
 shader_parameter/Position_Min = 0.25
 shader_parameter/Position_Max = 0.5
 shader_parameter/Alpha = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1jjxf"]
+streams_count = 7
+stream_0/stream = ExtResource("10_2hbv1")
+stream_1/stream = ExtResource("11_cxrqq")
+stream_2/stream = ExtResource("12_2i48q")
+stream_3/stream = ExtResource("13_f36nm")
+stream_4/stream = ExtResource("14_hh42m")
+stream_5/stream = ExtResource("15_6h53f")
+stream_6/stream = ExtResource("16_wncn5")
 
 [node name="SortTheSuds" type="Node2D"]
 script = ExtResource("1_3orje")
@@ -173,6 +191,12 @@ offset_bottom = 960.0
 
 [node name="WinningTimer" type="Timer" parent="."]
 wait_time = 3.0
+
+[node name="BubbleSFX" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_1jjxf")
+
+[node name="PlateSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_3f7qj")
 
 [connection signal="timeDone" from="LevelTimer" to="." method="_on_level_timer_time_done"]
 [connection signal="mouse_entered" from="Plate/PlateCollision" to="." method="_on_plate_collision_mouse_entered"]

@@ -41,6 +41,7 @@ func _input(event):
 	if plateHovered && Input.is_action_just_pressed("click") && !globalSudHover && !losing:
 		losing = true
 		plate.texture = brokenTexture
+		$PlateSFX.play()
 		sud1.hide()
 		sud2.hide()
 		sud3.hide()
@@ -50,10 +51,13 @@ func _input(event):
 		
 	if sudHovered1 && Input.is_action_just_pressed("click"):
 		sud1.hide()
+		$BubbleSFX.play()
 	if sudHovered2 && Input.is_action_just_pressed("click"):
 		sud2.hide()
+		$BubbleSFX.play()
 	if sudHovered3 && Input.is_action_just_pressed("click"):
 		sud3.hide()
+		$BubbleSFX.play()
 
 func _on_plate_collision_mouse_entered() -> void:
 	#if !mouse_left_down:
