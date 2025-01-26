@@ -190,7 +190,7 @@ func _new_level(trans):
 
 	next_level.win.connect(_level_won.bind(next_level))
 	next_level.lose.connect(_level_lost.bind(next_level))
-	next_level.level_timer.set_wait_time(GameTime)
 	add_child(next_level)
+	next_level.level_timer.timeToPlay = GameTime
 	ChangeAudio.emit(next_level_name)
 	#next_level.win.connect(_level_won.bind(next_level))
