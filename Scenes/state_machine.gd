@@ -16,6 +16,9 @@ var PlayerScore : int = 0
 var PlayerLives : int = 4
 var RandomInt : int = 0
 
+var LastInt : int = 0
+var LastLastInt : int = 0
+
 signal ChangeAudio
 
 # Called when the node enters the scene tree for the first time.
@@ -25,7 +28,9 @@ func _ready() -> void:
 	menu.play.connect(_start_game.bind(menu))
 	pass # Replace with function body.
 
-
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("quit"):
+		get_tree().quit()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -33,6 +38,8 @@ func _process(delta: float) -> void:
 func _main_menu(leaderboard):
 	leaderboard.queue_free()
 	
+	PlayerLives = 4
+	PlayerScore = 0
 	var menu = MAIN_MENU.instantiate()
 	add_child(menu)
 	ChangeAudio.emit()
@@ -51,7 +58,12 @@ func _start_game(menu):
 
 func _switch_level(trans):
 	trans.queue_free()
-	RandomInt = randi_range(0,5)
+	LastLastInt = LastInt
+	LastInt = RandomInt
+	
+	while RandomInt == LastInt or RandomInt == LastLastInt:
+		RandomInt = randi_range(0,5)
+		print(RandomInt)
 	
 	var tempTrans = TRANS_NEUTRAL.instantiate()
 	tempTrans.transition_init(RandomInt, PlayerLives)
@@ -75,7 +87,7 @@ func _level_won(level):
 func _level_lost(level):
 	PlayerLives -=1
 	level.queue_free()
-	if PlayerLives == 0:
+	if PlayerLives <= 0:
 		var tempLeader = LEADERBOARD.instantiate()
 		tempLeader._leaderboard_init(PlayerScore)
 		tempLeader.Menu.connect(_main_menu.bind(tempLeader))
