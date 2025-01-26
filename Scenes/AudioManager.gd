@@ -70,7 +70,7 @@ func _on_state_machine_change_audio(scene_name) -> void:
 			HipHopAudioPlayer.play()
 		"BubbleGumPop":
 			_stop_all()
-			PopGenreAudioPlayer.play()
+			DaftFunkAudioPlayer.play()
 		"Mentos":
 			_stop_all()
 			ElectronicRemixAudioPlayer.play()
