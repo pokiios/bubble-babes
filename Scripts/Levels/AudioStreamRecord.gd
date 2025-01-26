@@ -21,6 +21,9 @@ func _process(_delta: float) -> void:
 		if loudness >= threshhold:
 			success_percent += success_increments
 			trigger_effect()
+		else:
+			success_percent -= success_increments
+			trigger_effect()
 
 # Gets db level of 
 func get_power():
