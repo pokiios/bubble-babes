@@ -16,7 +16,7 @@ var FifthScore
 var scoresArray:Array
 var currentScore = 0
 
-signal Menu
+signal Menu(HighScore)
 
 func _leaderboard_init(Score):
 	#If file does not exist; create one
@@ -100,7 +100,8 @@ func _process(delta: float) -> void:
 # MENU BUTTON
 func _on_menu_button_pressed() -> void:
 	#get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn")
-	Menu.emit()
+	var tempstring = FirstText.text + FirstScore.text
+	emit_signal("Menu", tempstring)
 
 # SUBMIT BUTTON
 func _on_submit_button_pressed() -> void:

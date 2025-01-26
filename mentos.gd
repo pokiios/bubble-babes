@@ -3,6 +3,7 @@ extends Node2D
 #@onready var mintScene = preload("res://Scenes/Mint.tscn")
 const CONK_SPLODE_TEXTURE = preload("res://Sprites/Mentos/Mentoconksplode.png")
 @onready var spawnpoint = $Marker2D.position
+@onready var mat = $GrayScale.material
 
 @export var numOfMints = 4
 var MintArray : Array[Mint]
@@ -14,6 +15,7 @@ signal win
 signal lose
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	mat.set_shader_parameter("gray_a", 0)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$AnimationPlayer.stop(true)
 	
@@ -66,6 +68,5 @@ func _on_timer_time_done() -> void:
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	$AnimationPlayer.play("RESET")
 	lose.emit()
 	pass # Replace with function body.
