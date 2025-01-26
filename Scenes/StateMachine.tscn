@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://db7hchrkcdlcl"]
+[gd_scene load_steps=14 format=3 uid="uid://db7hchrkcdlcl"]
 
 [ext_resource type="Script" path="res://Scenes/state_machine.gd" id="1_yrvcf"]
 [ext_resource type="Script" path="res://Scenes/AudioManager.gd" id="2_tfx7g"]
@@ -9,6 +9,10 @@
 [ext_resource type="AudioStream" uid="uid://0sy4mt6pdq16" path="res://Audio/Music/444398__zagi2__daft-funk.wav" id="7_l31dj"]
 [ext_resource type="AudioStream" uid="uid://dw472cs4ce2se" path="res://Audio/Music/563244__yellowtree__discofunk-loop-v2.wav" id="8_md6t6"]
 [ext_resource type="AudioStream" uid="uid://bvq3krd8i0gv5" path="res://Audio/Music/701562__ztidlen__popiasound-popgenre-2.mp3" id="9_ewgdk"]
+[ext_resource type="AudioStream" uid="uid://0xii7snu2jdl" path="res://Audio/Music/702580__timbre_electronic-remix-of-freesound-702576.wav" id="10_rakaf"]
+[ext_resource type="AudioStream" uid="uid://bl6hm4rao547s" path="res://Audio/SFX/Victory Sound.mp3" id="11_3nvqv"]
+[ext_resource type="AudioStream" uid="uid://du0su3c8bi3sc" path="res://Audio/SFX/Lose Sound.wav" id="12_m3g04"]
+[ext_resource type="AudioStream" uid="uid://cjujwgltfwsxd" path="res://Audio/Music/785798__alien_i_trust__pressure-kick-by-alien-i-trust-125_bpm-6.wav" id="13_poruc"]
 
 [node name="StateMachine" type="Node2D"]
 script = ExtResource("1_yrvcf")
@@ -37,5 +41,17 @@ volume_db = 2.644
 
 [node name="PopGenreAudioPlayer" type="AudioStreamPlayer2D" parent="Node2D"]
 stream = ExtResource("9_ewgdk")
+
+[node name="ElectronicRemixAudioPlayer" type="AudioStreamPlayer2D" parent="Node2D"]
+stream = ExtResource("10_rakaf")
+
+[node name="VictoryAudioPlayer" type="AudioStreamPlayer2D" parent="Node2D"]
+stream = ExtResource("11_3nvqv")
+
+[node name="LoseAudioPlayer" type="AudioStreamPlayer2D" parent="Node2D"]
+stream = ExtResource("12_m3g04")
+
+[node name="AlienKickPlayer" type="AudioStreamPlayer2D" parent="Node2D"]
+stream = ExtResource("13_poruc")
 
 [connection signal="ChangeAudio" from="." to="Node2D" method="_on_state_machine_change_audio"]
