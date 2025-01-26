@@ -3,9 +3,15 @@ extends Control
 var instructions_array : Array = ["Tap those Raps!", "Blow up that Gum!", "Mint that Drink!", "Shake the Cans!", "Pop the Suds!", "Vent that Anger!"]
 var lives_position_array : Array = []
 var lives_array : Array = []
+var speed_up : bool = false
 signal transition_finished
 
 func transition_init(random_int : int, lives : int) -> void:
+	if speed_up:
+		$ColorRect2.visible = true
+	else:
+		$ColorRect2.visible = false
+	
 	$CanvasLayer/MarginContainer/Label.text = instructions_array[random_int]
 	lives_position_array.push_back($CanvasLayer/MarginContainer/Marker1)
 	lives_position_array.push_back($CanvasLayer/MarginContainer/Marker2)
@@ -22,12 +28,9 @@ func transition_init(random_int : int, lives : int) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
-	
 	#transition_init(2,2)
 	$Timer.start()
 	$AnimationPlayer.play("yapping")
-	
 
 
 func _on_timer_timeout() -> void:
