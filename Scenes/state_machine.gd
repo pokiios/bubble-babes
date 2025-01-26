@@ -21,10 +21,11 @@ var GameCount : int = 0
 var LastInt : int = 0
 var LastLastInt : int = 0
 
-signal ChangeAudio
+signal ChangeAudio(SceneName)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	set_name("StateMachine")
 	var scoreFile = "user://HighScores.txt"
 	var file
 
@@ -75,9 +76,10 @@ func _main_menu(score,leaderboard):
 	PlayerLives = 4
 	PlayerScore = 0
 	var menu = MAIN_MENU.instantiate()
+	menu.set_name("Menu")
 	add_child(menu)
 	menu.bubble_text = HighScore
-	ChangeAudio.emit()
+	ChangeAudio.emit("Menu")
 	menu.play.connect(_start_game.bind(menu))
 
 func _start_game(menu):
@@ -88,7 +90,7 @@ func _start_game(menu):
 	tempTrans.transition_init(RandomInt, PlayerLives)
 	tempTrans.transition_finished.connect(_new_level.bind(tempTrans))
 	add_child(tempTrans)
-	ChangeAudio.emit()
+	ChangeAudio.emit("TransNeutral")
 	#add_child(transition) -- pass in randomint and lives number
 
 func _switch_level(trans):
@@ -104,7 +106,7 @@ func _switch_level(trans):
 	tempTrans.transition_init(RandomInt, PlayerLives)
 	tempTrans.transition_finished.connect(_new_level.bind(tempTrans))
 	add_child(tempTrans)
-	ChangeAudio.emit()
+	ChangeAudio.emit("TransNeutral")
 	
 func _level_won(level):
 	PlayerScore +=1
@@ -114,7 +116,7 @@ func _level_won(level):
 	tempTrans.transition_init(PlayerLives, PlayerScore)
 	tempTrans.transition_finished.connect(_switch_level.bind(tempTrans))
 	add_child(tempTrans)
-	ChangeAudio.emit()
+	ChangeAudio.emit("TransWin")
 	#addchild transition good
 
 	pass
@@ -127,14 +129,14 @@ func _level_lost(level):
 		tempLeader._leaderboard_init(PlayerScore)
 		tempLeader.Menu.connect(_main_menu.bind(tempLeader))
 		add_child(tempLeader)
-		ChangeAudio.emit()
+		ChangeAudio.emit("Leaderboard")
 		#add_child() leaderboard
 	else:
 		var tempTrans = TRANS_LOSE.instantiate()
 		tempTrans.transition_init(PlayerLives, PlayerScore)
 		tempTrans.transition_finished.connect(_switch_level.bind(tempTrans))
 		add_child(tempTrans)
-		ChangeAudio.emit()
+		ChangeAudio.emit("TransLose")
 		#addchild transition bad
 	pass
 
@@ -142,24 +144,31 @@ func _new_level(trans):
 	trans.queue_free()
 	GameCount +=1
 	var next_level
+	var next_level_name
 	match RandomInt:
 		0: 
 			next_level  = RAP_GAME.instantiate()
+			next_level_name = "BubbleRap"
 
 		1: 
 			next_level  = GUM_GAME.instantiate()
+			next_level_name = "BubbleGumPop"
 
 		2: 
 			next_level  = MENTO_GAME.instantiate()
+			next_level_name = "Mentos"
 
 		3: 
 			next_level  = CANS_GAME.instantiate()
+			next_level_name = "Cans"
 
 		4: 
 			next_level  = SUDS_GAME.instantiate()
+			next_level_name = "SortTheSuds"
 
 		5: 
 			next_level  = SPEECHBUBBLE_GAME.instantiate()
+			next_level_name = "Scream"
 			
 	#if GameCount >= 7:
 	#	next_level.time -= 1
@@ -167,5 +176,5 @@ func _new_level(trans):
 	next_level.win.connect(_level_won.bind(next_level))
 	next_level.lose.connect(_level_lost.bind(next_level))
 	add_child(next_level)
-	ChangeAudio.emit()
+	ChangeAudio.emit(next_level_name)
 	#next_level.win.connect(_level_won.bind(next_level))
