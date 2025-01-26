@@ -3,6 +3,8 @@ extends Node2D
 signal win
 signal lose
 @onready var mat = $GrayScale.material
+@onready var level_timer = $CanvasLayer/LevelTimer
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

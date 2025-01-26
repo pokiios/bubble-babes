@@ -6,6 +6,8 @@ extends Node2D
 @onready var rapBubble3 : Sprite2D = $RapBubble3
 @onready var rapBubble4 : Sprite2D = $RapBubble4
 @onready var lyric = $Lyrics
+@onready var level_timer = $LevelTimer
+
 var bubblePositionsX : Array = [146, 440, 156, 427, 146, 684, 708, 396, 916, 658, 1135, 1070, 1104]
 var bubblePositionsY : Array = [142, 289, 422, 556, 729, 527, 274, 813, 823, 744, 674, 426, 155]
 var rng = RandomNumberGenerator.new()
@@ -21,6 +23,7 @@ var rapPos : int = 0
 var currentLyric : String = ""
 var has_lost : bool
 
+var time : int  = 0
 
 signal win
 signal lose
