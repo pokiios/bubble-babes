@@ -12,12 +12,15 @@ var brokenTexture = load("res://Sprites/Suds/sudsBrockenPlate.png")
 @onready var sud1 = $Sud
 @onready var sud2 = $Sud2
 @onready var sud3 = $Sud3
+@onready var mat = $GrayScale.material
+
 
 signal win
 signal lose
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	mat.set_shader_parameter("gray_a", 0)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$AnimationPlayer.stop(true)
 
@@ -92,7 +95,5 @@ func _on_level_timer_time_done() -> void:
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	$AnimationPlayer.play("RESET")
-
 	lose.emit()
 	pass # Replace with function body.

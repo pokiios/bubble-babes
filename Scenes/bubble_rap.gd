@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var mat = $GrayScale.material
 @onready var rapBubble1 = $RapBubble1
 @onready var rapBubble2 = $RapBubble2
 @onready var rapBubble3 = $RapBubble3
@@ -19,10 +20,12 @@ var rapStartPos = [0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48]
 var rapPos = 0
 var currentLyric = ""
 
+
 signal win
 signal lose
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	mat.set_shader_parameter("gray_a", 0)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	lyric.text = currentLyric
 	$AnimationPlayer.stop(true)
@@ -108,5 +111,6 @@ func _on_rap_bubble_collision_4_mouse_exited() -> void:
 
 func _on_level_timer_time_done() -> void:
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	$AnimationPlayer.play("fade_to_gray")
 	print("loser loser")
 	lose.emit()

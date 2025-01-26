@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bgf7kas065jrb"]
+[gd_scene load_steps=16 format=3 uid="uid://bgf7kas065jrb"]
 
 [ext_resource type="Texture2D" uid="uid://c1xb8mhb0eugf" path="res://Sprites/Rap/Bubble Rap Background.png" id="1_tqba5"]
 [ext_resource type="Script" path="res://Scenes/bubble_rap.gd" id="1_u8chl"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://3jx3bsvdpka7" path="res://Scenes/Timer.tscn" id="3_tfcfe"]
 [ext_resource type="Texture2D" uid="uid://r56yhj3jnwe7" path="res://Assets/Bubbles/bubble_3.png" id="4_isn8i"]
 [ext_resource type="Texture2D" uid="uid://brii0m6y2rf4r" path="res://Assets/Bubbles/bubble_4.png" id="5_kwcnu"]
+[ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="9_qho2h"]
 
 [sub_resource type="Animation" id="Animation_vtpff"]
 length = 0.001
@@ -34,6 +35,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(0.490196, 0.27451, 0.745098, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../GrayScale:material:shader_parameter/gray_a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_0xlve"]
@@ -63,13 +76,33 @@ tracks/1/keys = {
 "values": [Color(0.490196, 0.27451, 0.745098, 1), Color(0.490196, 0.27451, 0.745098, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_iauxo"]
+resource_name = "fade_to_gray"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../GrayScale:material:shader_parameter/gray_a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.233258, 1.86607),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_80p7p"]
 _data = {
 "RESET": SubResource("Animation_vtpff"),
-"fade_text": SubResource("Animation_0xlve")
+"fade_text": SubResource("Animation_0xlve"),
+"fade_to_gray": SubResource("Animation_iauxo")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ynr1k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rbnn1"]
+shader = ExtResource("9_qho2h")
+shader_parameter/gray_a = 0.0
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_u8chl")
@@ -139,6 +172,13 @@ texture = ExtResource("5_kwcnu")
 [node name="RapBubbleCollisionShape4" type="CollisionShape2D" parent="RapBubble4/RapBubbleCollision4"]
 scale = Vector2(12, 12)
 shape = SubResource("CircleShape2D_ynr1k")
+
+[node name="GrayScale" type="ColorRect" parent="."]
+z_index = 4
+material = SubResource("ShaderMaterial_rbnn1")
+offset_right = 1280.0
+offset_bottom = 960.0
+mouse_filter = 2
 
 [connection signal="timeDone" from="LevelTimer" to="." method="_on_level_timer_time_done"]
 [connection signal="mouse_entered" from="RapBubble1/RapBubbleCollision1" to="." method="_on_rap_bubble_collision_1_mouse_entered"]
