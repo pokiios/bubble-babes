@@ -15,7 +15,7 @@ const SPEECHBUBBLE_GAME = preload("res://Scenes/SpeechBubble.tscn")
 var PlayerScore : int = 0
 var PlayerLives : int = 4
 var RandomInt : int = 0
-
+var HighScore : String = ""
 var GameCount : int = 0
 
 var LastInt : int = 0
@@ -25,8 +25,40 @@ signal ChangeAudio
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	var scoreFile = "user://HighScores.txt"
+	var file
+
+	if !FileAccess.file_exists(scoreFile):
+		file = FileAccess.open(scoreFile, FileAccess.WRITE_READ) # WRITE_READ creates file if it doesn't exist
+	#If file does exist; open for reading
+	else:
+		file = FileAccess.open(scoreFile, FileAccess.READ_WRITE)
+		
+		
+	var readText = file.get_as_text()
+	var splitText = readText.split(":")
+	var scoresArray : Array
+	scoresArray.clear()
+	
+	var temp:Array
+	for each in splitText:
+		temp = each.split(",")
+		scoresArray.push_back(temp)
+		
+	for j in range(0, scoresArray.size()):
+		var key = scoresArray[j]
+		var i = j-1
+		while i>=0 and int(scoresArray[i][1])>int(key[1]):
+			scoresArray[i+1] = scoresArray[i]
+			i = i - 1
+		scoresArray[i+1] = key
+	scoresArray.reverse()
+	
+	HighScore = scoresArray[0][0] + " " + scoresArray[0][1]
+	
 	var menu = MAIN_MENU.instantiate()
 	add_child(menu)
+	menu.bubble_text = HighScore
 	menu.play.connect(_start_game.bind(menu))
 	pass # Replace with function body.
 
@@ -37,13 +69,14 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _main_menu(leaderboard):
+func _main_menu(score,leaderboard):
 	leaderboard.queue_free()
-	
+	HighScore = score
 	PlayerLives = 4
 	PlayerScore = 0
 	var menu = MAIN_MENU.instantiate()
 	add_child(menu)
+	menu.bubble_text = HighScore
 	ChangeAudio.emit()
 	menu.play.connect(_start_game.bind(menu))
 

@@ -16,14 +16,14 @@ func _process(delta: float) -> void:
 	$CanvasLayer/Bubble/Label.text = bubble_text
 	
 	if going_right:
-		bubble.position.x += 1
+		bubble.position.x += 5
 	if !going_right:
-		bubble.position.x -= 1
+		bubble.position.x -= 5
 
 	if going_up:
-		bubble.position.y -= 1
+		bubble.position.y -= 5
 	if !going_up:
-		bubble.position.y += 1
+		bubble.position.y += 5
 	
 	if $CanvasLayer/Bubble.position.x >= 1280 -100:
 		#$CanvasLayer/Bubble.position.x = 1280
