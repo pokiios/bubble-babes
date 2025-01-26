@@ -4,7 +4,7 @@ extends Node2D
 const CONK_SPLODE_TEXTURE = preload("res://Sprites/Mentos/Mentoconksplode.png")
 @onready var spawnpoint = $Marker2D.position
 @onready var mat = $GrayScale.material
-@onready var level_timer = $Timer
+@onready var level_timer = $CanvasLayer/Timer
 
 
 @export var numOfMints = 4
