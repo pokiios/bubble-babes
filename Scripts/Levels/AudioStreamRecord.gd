@@ -35,6 +35,7 @@ func trigger_effect():
 	match(levels):
 		0:
 			if success_percent >= 1 and !has_been_called:
+				$"../PopSFXPlayer".play()
 				has_been_called = true
 				stop = true
 				level_complete.emit()

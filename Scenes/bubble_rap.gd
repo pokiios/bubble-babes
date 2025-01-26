@@ -22,6 +22,7 @@ var rapStartPos : Array = [0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48]
 var rapPos : int = 0
 var currentLyric : String = ""
 var has_lost : bool
+var PopSFXPlayer
 
 var time : int  = 0
 
@@ -29,6 +30,7 @@ signal win
 signal lose
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	PopSFXPlayer = $PopSFXPlayer
 	$Highlight.visible = false
 	mat.set_shader_parameter("gray_a", 0)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -63,12 +65,14 @@ func _process(delta: float) -> void:
 func _input(event):
 	if bubbleHover1 && Input.is_action_just_pressed("click") && currentBubble == 1:
 		rapBubble1.hide()
+		PopSFXPlayer.play()
 		currentLyric = rapLyrics[rapPos]
 		rapPos += 1
 		currentBubble += 1
 		$AnimationPlayer.play("fade_text")
 	if bubbleHover2 && Input.is_action_just_pressed("click") && currentBubble == 2:
 		rapBubble2.hide()
+		PopSFXPlayer.play()
 		currentLyric = rapLyrics[rapPos]
 		rapPos += 1
 		currentBubble += 1
@@ -76,6 +80,7 @@ func _input(event):
 		$AnimationPlayer.play("fade_text")
 	if bubbleHover3 && Input.is_action_just_pressed("click") && currentBubble == 3:
 		rapBubble3.hide()
+		PopSFXPlayer.play()
 		currentLyric = rapLyrics[rapPos]
 		rapPos += 1
 		currentBubble += 1
@@ -83,6 +88,7 @@ func _input(event):
 		$AnimationPlayer.play("fade_text")
 	if bubbleHover4 && Input.is_action_just_pressed("click") && currentBubble == 4:
 		rapBubble4.hide()
+		PopSFXPlayer.play()
 		currentLyric = rapLyrics[rapPos]
 		currentBubble += 1
 		$AnimationPlayer.stop(true)

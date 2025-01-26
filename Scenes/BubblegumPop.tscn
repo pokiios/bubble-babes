@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cc1g0xs1ce6al"]
+[gd_scene load_steps=22 format=3 uid="uid://cc1g0xs1ce6al"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/BubblegumPop.gd" id="1_b4pfb"]
 [ext_resource type="Script" path="res://Scripts/Levels/AudioStreamRecord.gd" id="2_otn4g"]
@@ -7,6 +7,13 @@
 [ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="5_yb4oj"]
 [ext_resource type="PackedScene" uid="uid://3jx3bsvdpka7" path="res://Scenes/Timer.tscn" id="6_r0ow3"]
 [ext_resource type="Shader" path="res://Shaders/highlight.gdshader" id="7_nq5lf"]
+[ext_resource type="AudioStream" uid="uid://dkh6dg3cau5fu" path="res://Audio/SFX/bubble pop 1.wav" id="8_amqi1"]
+[ext_resource type="AudioStream" uid="uid://do5g7x7sv5agn" path="res://Audio/SFX/bubble pop 2.wav" id="9_f7tlg"]
+[ext_resource type="AudioStream" uid="uid://b2efrhshlexbl" path="res://Audio/SFX/bubble pop 3.wav" id="10_cuorn"]
+[ext_resource type="AudioStream" uid="uid://c6xs5ppecbekc" path="res://Audio/SFX/bubble pop 4.wav" id="11_1m3ag"]
+[ext_resource type="AudioStream" uid="uid://0u6jchw30q2k" path="res://Audio/SFX/bubble pop 5.wav" id="12_3etxl"]
+[ext_resource type="AudioStream" uid="uid://d3tvto33qwr6c" path="res://Audio/SFX/bubble pop 6.wav" id="13_pbtbo"]
+[ext_resource type="AudioStream" uid="uid://ktlkxttmjl6v" path="res://Audio/SFX/bubble pop 7.wav" id="14_oancb"]
 
 [sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_7mi8s"]
 
@@ -75,6 +82,16 @@ shader_parameter/Position_Min = 0.25
 shader_parameter/Position_Max = 0.5
 shader_parameter/Alpha = 1.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xu1gi"]
+streams_count = 7
+stream_0/stream = ExtResource("8_amqi1")
+stream_1/stream = ExtResource("9_f7tlg")
+stream_2/stream = ExtResource("10_cuorn")
+stream_3/stream = ExtResource("11_1m3ag")
+stream_4/stream = ExtResource("12_3etxl")
+stream_5/stream = ExtResource("13_pbtbo")
+stream_6/stream = ExtResource("14_oancb")
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_b4pfb")
 
@@ -120,6 +137,9 @@ offset_bottom = 960.0
 
 [node name="WinningTimer" type="Timer" parent="."]
 wait_time = 3.0
+
+[node name="PopSFXPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_xu1gi")
 
 [connection signal="level_complete" from="AudioStreamRecord" to="." method="_on_audio_stream_record_level_complete"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
