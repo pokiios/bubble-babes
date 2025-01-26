@@ -102,10 +102,7 @@ func _switch_level(trans):
 	LastLastInt = LastInt
 	LastInt = RandomInt
 	
-	if GameCount >= 7:
-		if GameTime > 3:
-			GameTime -= 1
-		GameCount = 0
+	
 	
 	while RandomInt == LastInt or RandomInt == LastLastInt:
 		RandomInt = randi_range(0,5)
@@ -113,9 +110,17 @@ func _switch_level(trans):
 	
 	var tempTrans = TRANS_NEUTRAL.instantiate()
 	tempTrans.get_child(4).set_wait_time(TransTime)
+	if GameCount >= 7:
+		if GameTime > 3:
+			GameTime -= 1
+			tempTrans.speed_up = true
+		GameCount = 0
+	else:
+		tempTrans.speed_up = false
 	tempTrans.transition_init(RandomInt, PlayerLives)
 	tempTrans.transition_finished.connect(_new_level.bind(tempTrans))
 	add_child(tempTrans)
+
 	ChangeAudio.emit("TransNeutral")
 	
 func _level_won(level):
