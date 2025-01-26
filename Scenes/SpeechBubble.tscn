@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ccemlei8prxfw"]
+[gd_scene load_steps=16 format=3 uid="uid://ccemlei8prxfw"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/SpeechBubble.gd" id="1_4lyl2"]
 [ext_resource type="Script" path="res://Scripts/Levels/AudioStreamRecord.gd" id="1_fauk2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bwwuk3qcnpjoa" path="res://Sprites/Scream/speechbubbleScream.png" id="2_fbty3"]
 [ext_resource type="Texture2D" uid="uid://1ujxspeb2imn" path="res://Sprites/Scream/speechbubblebk.png" id="3_7u717"]
 [ext_resource type="PackedScene" uid="uid://3jx3bsvdpka7" path="res://Scenes/Timer.tscn" id="6_5q314"]
+[ext_resource type="Shader" path="res://Shaders/highlight.gdshader" id="7_m8bfy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6a7r4"]
 
@@ -80,6 +81,19 @@ _data = {
 shader = ExtResource("1_t4yun")
 shader_parameter/gray_a = 0.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dln4f"]
+shader = ExtResource("7_m8bfy")
+shader_parameter/Line_Smoothness = 0.045
+shader_parameter/Line_Width = 0.054
+shader_parameter/Brightness = 3.0
+shader_parameter/Rotation_deg = 30.0
+shader_parameter/Distortion = 1.8
+shader_parameter/Speed = 0.7
+shader_parameter/Position = 0.0
+shader_parameter/Position_Min = 0.25
+shader_parameter/Position_Max = 0.5
+shader_parameter/Alpha = 1.0
+
 [node name="Node2D" type="Node2D"]
 material = SubResource("ShaderMaterial_6a7r4")
 script = ExtResource("1_4lyl2")
@@ -124,6 +138,17 @@ offset_top = 0.0
 offset_right = 1280.0
 offset_bottom = 960.0
 
+[node name="Highlight" type="ColorRect" parent="."]
+visible = false
+z_index = 5
+material = SubResource("ShaderMaterial_dln4f")
+offset_right = 1280.0
+offset_bottom = 960.0
+
+[node name="WinningTimer" type="Timer" parent="."]
+wait_time = 3.0
+
 [connection signal="level_complete" from="AudioStreamRecord" to="." method="_on_audio_stream_record_level_complete"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeDone" from="LevelTimer" to="." method="_on_level_timer_time_done"]
+[connection signal="timeout" from="WinningTimer" to="." method="_on_winning_timer_timeout"]

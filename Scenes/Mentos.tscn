@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bjs70vrh504is"]
+[gd_scene load_steps=19 format=3 uid="uid://bjs70vrh504is"]
 
 [ext_resource type="Texture2D" uid="uid://dn5plkeb0vr7" path="res://Sprites/Mentos/Mentobackground.png" id="1_3mnn4"]
 [ext_resource type="Script" path="res://mentos.gd" id="1_fis2a"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bbrx223glx7x1" path="res://Sprites/Mentos/mentoarm.png" id="4_i6son"]
 [ext_resource type="Script" path="res://MentoHand.gd" id="5_5i0ap"]
 [ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="7_dk3xm"]
+[ext_resource type="Shader" path="res://Shaders/highlight.gdshader" id="8_q4n7r"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y7pa2"]
 radius = 4.28126
@@ -142,6 +143,19 @@ _data = {
 "fade_to_gray": SubResource("Animation_7u6pq")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_accma"]
+shader = ExtResource("8_q4n7r")
+shader_parameter/Line_Smoothness = 0.045
+shader_parameter/Line_Width = 0.054
+shader_parameter/Brightness = 3.0
+shader_parameter/Rotation_deg = 30.0
+shader_parameter/Distortion = 1.8
+shader_parameter/Speed = 0.7
+shader_parameter/Position = 0.0
+shader_parameter/Position_Min = 0.25
+shader_parameter/Position_Max = 0.5
+shader_parameter/Alpha = 1.0
+
 [node name="Mentos" type="Node2D"]
 script = ExtResource("1_fis2a")
 
@@ -204,5 +218,16 @@ libraries = {
 "": SubResource("AnimationLibrary_et762")
 }
 
+[node name="Highlight" type="ColorRect" parent="."]
+visible = false
+z_index = 5
+material = SubResource("ShaderMaterial_accma")
+offset_right = 1280.0
+offset_bottom = 960.0
+
+[node name="WinningTimer" type="Timer" parent="."]
+wait_time = 3.0
+
 [connection signal="timeDone" from="CanvasLayer/Timer" to="." method="_on_timer_time_done"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="WinningTimer" to="." method="_on_winning_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dulowrcksv4mf"]
+[gd_scene load_steps=14 format=3 uid="uid://dulowrcksv4mf"]
 
 [ext_resource type="PackedScene" uid="uid://3jx3bsvdpka7" path="res://Scenes/Timer.tscn" id="1_5jwfv"]
 [ext_resource type="Script" path="res://Scenes/cans.gd" id="1_n4kri"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ccbmby5kns7uo" path="res://Assets/Shake the Can/arm-empty.png" id="4_w2wbx"]
 [ext_resource type="Script" path="res://MentoHand.gd" id="5_c1slh"]
 [ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="7_oke3x"]
+[ext_resource type="Shader" path="res://Shaders/highlight.gdshader" id="8_gqfe8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sf207"]
 shader = ExtResource("7_oke3x")
@@ -72,6 +73,19 @@ _data = {
 "fade_to_gray": SubResource("Animation_3kmlr")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m2dpw"]
+shader = ExtResource("8_gqfe8")
+shader_parameter/Line_Smoothness = 0.045
+shader_parameter/Line_Width = 0.054
+shader_parameter/Brightness = 3.0
+shader_parameter/Rotation_deg = 30.0
+shader_parameter/Distortion = 1.8
+shader_parameter/Speed = 0.7
+shader_parameter/Position = 0.0
+shader_parameter/Position_Min = 0.25
+shader_parameter/Position_Max = 0.5
+shader_parameter/Alpha = 1.0
+
 [node name="Cans" type="Node2D"]
 script = ExtResource("1_n4kri")
 
@@ -115,5 +129,16 @@ libraries = {
 "": SubResource("AnimationLibrary_2wyva")
 }
 
+[node name="Highlight" type="ColorRect" parent="."]
+visible = false
+z_index = 5
+material = SubResource("ShaderMaterial_m2dpw")
+offset_right = 1280.0
+offset_bottom = 960.0
+
+[node name="WinningTimer" type="Timer" parent="."]
+wait_time = 3.0
+
 [connection signal="timeDone" from="CanvasLayer/LevelTimer" to="." method="_on_level_timer_time_done"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="WinningTimer" to="." method="_on_winning_timer_timeout"]

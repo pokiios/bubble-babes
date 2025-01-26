@@ -1,30 +1,32 @@
 extends Node2D
 
 @onready var mat = $GrayScale.material
-@onready var rapBubble1 = $RapBubble1
-@onready var rapBubble2 = $RapBubble2
-@onready var rapBubble3 = $RapBubble3
-@onready var rapBubble4 = $RapBubble4
+@onready var rapBubble1 : Sprite2D = $RapBubble1
+@onready var rapBubble2 : Sprite2D = $RapBubble2
+@onready var rapBubble3 : Sprite2D = $RapBubble3
+@onready var rapBubble4 : Sprite2D = $RapBubble4
 @onready var lyric = $Lyrics
-var bubblePositionsX = [146, 440, 156, 427, 146, 684, 708, 396, 916, 658, 1135, 1070, 1104]
-var bubblePositionsY = [142, 289, 422, 556, 729, 527, 274, 813, 823, 744, 674, 426, 155]
+var bubblePositionsX : Array = [146, 440, 156, 427, 146, 684, 708, 396, 916, 658, 1135, 1070, 1104]
+var bubblePositionsY : Array = [142, 289, 422, 556, 729, 527, 274, 813, 823, 744, 674, 426, 155]
 var rng = RandomNumberGenerator.new()
-var count = 1;
-var bubbleHover1 = false
-var bubbleHover2 = false
-var bubbleHover3 = false
-var bubbleHover4 = false
-var currentBubble = 1;
-var rapLyrics = ["oh", "snap", "bubble", "rap", "pop", "pop", "can't", "stop", "something", "something", "something", "BUBBLE!", "space", "bubble", "go", "hubble", "bubble", "time", "doing", "fine", "nintendo", "don't", "sue", "us", "short", "song", "not", "long", "barely", "time", "to", "rhyme", "is", "Gabe", "bubble", "babe", "my", "lifespan", "is", "short", "wario", "who?", "bubble", "cool!", "bubble", "tea", "ain't", "me", "winners", "drink", "conka", "conka"]
-var rapStartPos = [0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48]
-var rapPos = 0
-var currentLyric = ""
+var count : int = 1;
+var bubbleHover1 : bool = false
+var bubbleHover2 : bool = false
+var bubbleHover3 : bool = false
+var bubbleHover4 : bool = false
+var currentBubble : int = 1;
+var rapLyrics : Array = ["oh", "snap", "bubble", "rap", "pop", "pop", "can't", "stop", "something", "something", "something", "BUBBLE!", "space", "bubble", "go", "hubble", "bubble", "time", "doing", "fine", "nintendo", "don't", "sue", "us", "short", "song", "not", "long", "barely", "time", "to", "rhyme", "is", "Gabe", "bubble", "babe", "my", "lifespan", "is", "short", "wario", "who?", "bubble", "cool!", "bubble", "tea", "ain't", "me", "winners", "drink", "conka", "conka"]
+var rapStartPos : Array = [0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48]
+var rapPos : int = 0
+var currentLyric : String = ""
+var has_lost : bool
 
 
 signal win
 signal lose
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$Highlight.visible = false
 	mat.set_shader_parameter("gray_a", 0)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	lyric.text = currentLyric
@@ -53,8 +55,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if currentBubble > 4:
-		win.emit()
+	pass
 
 func _input(event):
 	if bubbleHover1 && Input.is_action_just_pressed("click") && currentBubble == 1:
@@ -110,7 +111,14 @@ func _on_rap_bubble_collision_4_mouse_exited() -> void:
 	bubbleHover4 = false
 
 func _on_level_timer_time_done() -> void:
+	if currentBubble > 4:
+		$Highlight.visible = true
+		$WinningTimer.start()
+	else: 
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	$AnimationPlayer.play("fade_to_gray")
-	print("loser loser")
-	lose.emit()
+		$AnimationPlayer.play("fade_to_gray")
+		print("loser loser")
+		lose.emit()
+
+func _on_winning_timer_timeout() -> void:
+	win.emit()
