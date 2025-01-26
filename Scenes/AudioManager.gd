@@ -39,25 +39,35 @@ func _stop_all() -> void:
 func _on_state_machine_change_audio(scene_name) -> void:
 	match scene_name:
 		"Menu":
-			pass
+			_stop_all()
+			DiscoFunkAudioPlayer.play()
 		"TransWin":
-			pass
-		"TransLose":
-			pass
-		"TransNeutral":
-			pass
-		"LeaderBoard":
-			pass
-		"BubbleRap":
-			pass
-		"BubbleGumPop":
-			pass
-		"Mentos":
-			pass
-		"Cans":
-			pass
-		"SortTheSuds":
 			_stop_all()
 			SillyVocalAudioPlayer.play()
+		"TransLose":
+			_stop_all()
+			HipHopAudioPlayer.play()
+		"TransNeutral":
+			_stop_all()
+			PopGenreAudioPlayer.play()
+		"LeaderBoard":
+			_stop_all()
+			DanceBeatAudioPlayer.play()
+		"BubbleRap":
+			_stop_all()
+			HipHopAudioPlayer.play()
+		"BubbleGumPop":
+			_stop_all()
+			PopGenreAudioPlayer.play()
+		"Mentos":
+			_stop_all()
+			NinetiesAudioPlayer.play()
+		"Cans":
+			_stop_all()
+			SillyVocalAudioPlayer.play()
+		"SortTheSuds":
+			_stop_all()
+			PopGenreAudioPlayer.play()
 		"Scream":
-			pass
+			_stop_all()
+			DaftFunkAudioPlayer.play()
