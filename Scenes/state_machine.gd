@@ -16,6 +16,8 @@ var PlayerScore : int = 0
 var PlayerLives : int = 4
 var RandomInt : int = 0
 
+var GameCount : int = 0
+
 var LastInt : int = 0
 var LastLastInt : int = 0
 
@@ -105,6 +107,7 @@ func _level_lost(level):
 
 func _new_level(trans):
 	trans.queue_free()
+	GameCount +=1
 	var next_level
 	match RandomInt:
 		0: 
@@ -125,7 +128,9 @@ func _new_level(trans):
 		5: 
 			next_level  = SPEECHBUBBLE_GAME.instantiate()
 			
-
+	#if GameCount >= 7:
+	#	next_level.time -= 1
+	#	GameCount = 0
 	next_level.win.connect(_level_won.bind(next_level))
 	next_level.lose.connect(_level_lost.bind(next_level))
 	add_child(next_level)
