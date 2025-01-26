@@ -16,6 +16,8 @@ var PlayerScore : int = 0
 var PlayerLives : int = 4
 var RandomInt : int = 0
 
+signal ChangeAudio
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var menu = MAIN_MENU.instantiate()
@@ -33,6 +35,7 @@ func _main_menu(leaderboard):
 	
 	var menu = MAIN_MENU.instantiate()
 	add_child(menu)
+	ChangeAudio.emit()
 	menu.play.connect(_start_game.bind(menu))
 
 func _start_game(menu):
@@ -43,6 +46,7 @@ func _start_game(menu):
 	tempTrans.transition_init(RandomInt, PlayerLives)
 	tempTrans.transition_finished.connect(_new_level.bind(tempTrans))
 	add_child(tempTrans)
+	ChangeAudio.emit()
 	#add_child(transition) -- pass in randomint and lives number
 
 func _switch_level(trans):
@@ -53,6 +57,7 @@ func _switch_level(trans):
 	tempTrans.transition_init(RandomInt, PlayerLives)
 	tempTrans.transition_finished.connect(_new_level.bind(tempTrans))
 	add_child(tempTrans)
+	ChangeAudio.emit()
 	
 func _level_won(level):
 	PlayerScore +=1
@@ -62,6 +67,7 @@ func _level_won(level):
 	tempTrans.transition_init(PlayerLives, PlayerScore)
 	tempTrans.transition_finished.connect(_switch_level.bind(tempTrans))
 	add_child(tempTrans)
+	ChangeAudio.emit()
 	#addchild transition good
 
 	pass
@@ -74,12 +80,14 @@ func _level_lost(level):
 		tempLeader._leaderboard_init(PlayerScore)
 		tempLeader.Menu.connect(_main_menu.bind(tempLeader))
 		add_child(tempLeader)
+		ChangeAudio.emit()
 		#add_child() leaderboard
 	else:
 		var tempTrans = TRANS_LOSE.instantiate()
 		tempTrans.transition_init(PlayerLives, PlayerScore)
 		tempTrans.transition_finished.connect(_switch_level.bind(tempTrans))
 		add_child(tempTrans)
+		ChangeAudio.emit()
 		#addchild transition bad
 	pass
 
@@ -109,4 +117,5 @@ func _new_level(trans):
 	next_level.win.connect(_level_won.bind(next_level))
 	next_level.lose.connect(_level_lost.bind(next_level))
 	add_child(next_level)
+	ChangeAudio.emit()
 	#next_level.win.connect(_level_won.bind(next_level))
