@@ -65,7 +65,7 @@ func _switch_level(trans):
 	
 	while RandomInt == LastInt or RandomInt == LastLastInt:
 		RandomInt = randi_range(0,5)
-		print(RandomInt)
+	print(RandomInt)
 	
 	var tempTrans = TRANS_NEUTRAL.instantiate()
 	tempTrans.transition_init(RandomInt, PlayerLives)

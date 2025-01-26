@@ -151,5 +151,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
 [connection signal="pressed" from="CanvasLayer/ColorRect/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/ColorRect/MarginContainer/Quit" to="." method="_on_quit_pressed"]
