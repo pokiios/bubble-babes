@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://de6q6h0tkqyhm"]
+[gd_scene load_steps=18 format=3 uid="uid://de6q6h0tkqyhm"]
 
 [ext_resource type="Script" path="res://Scenes/sort_the_suds.gd" id="1_3orje"]
 [ext_resource type="Texture2D" uid="uid://b72j03hdomixx" path="res://Sprites/Suds/sudsBackground.png" id="1_doq7f"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bkr8mlxxsu28k" path="res://Sprites/Suds/sudsFinger.png" id="5_4nuhl"]
 [ext_resource type="Script" path="res://MentoHand.gd" id="6_2vvo2"]
 [ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="8_xd727"]
+[ext_resource type="Shader" path="res://Shaders/highlight.gdshader" id="9_tag4s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4qq3x"]
 
@@ -69,6 +70,19 @@ _data = {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xylgg"]
 shader = ExtResource("8_xd727")
 shader_parameter/gray_a = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_adovu"]
+shader = ExtResource("9_tag4s")
+shader_parameter/Line_Smoothness = 0.045
+shader_parameter/Line_Width = 0.054
+shader_parameter/Brightness = 3.0
+shader_parameter/Rotation_deg = 30.0
+shader_parameter/Distortion = 1.8
+shader_parameter/Speed = 0.7
+shader_parameter/Position = 0.0
+shader_parameter/Position_Min = 0.25
+shader_parameter/Position_Max = 0.5
+shader_parameter/Alpha = 1.0
 
 [node name="SortTheSuds" type="Node2D"]
 script = ExtResource("1_3orje")
@@ -150,6 +164,16 @@ offset_right = 1280.0
 offset_bottom = 960.0
 mouse_filter = 2
 
+[node name="Highlight" type="ColorRect" parent="."]
+visible = false
+z_index = 5
+material = SubResource("ShaderMaterial_adovu")
+offset_right = 1280.0
+offset_bottom = 960.0
+
+[node name="WinningTimer" type="Timer" parent="."]
+wait_time = 3.0
+
 [connection signal="timeDone" from="LevelTimer" to="." method="_on_level_timer_time_done"]
 [connection signal="mouse_entered" from="Plate/PlateCollision" to="." method="_on_plate_collision_mouse_entered"]
 [connection signal="mouse_entered" from="Sud/SudCollision" to="." method="_on_sud_collision_mouse_entered"]
@@ -159,3 +183,4 @@ mouse_filter = 2
 [connection signal="mouse_entered" from="Sud3/SudCollision3" to="." method="_on_sud_collision_3_mouse_entered"]
 [connection signal="mouse_exited" from="Sud3/SudCollision3" to="." method="_on_sud_collision_3_mouse_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="WinningTimer" to="." method="_on_winning_timer_timeout"]

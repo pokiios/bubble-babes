@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bgf7kas065jrb"]
+[gd_scene load_steps=18 format=3 uid="uid://bgf7kas065jrb"]
 
 [ext_resource type="Texture2D" uid="uid://c1xb8mhb0eugf" path="res://Sprites/Rap/Bubble Rap Background.png" id="1_tqba5"]
 [ext_resource type="Script" path="res://Scenes/bubble_rap.gd" id="1_u8chl"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://r56yhj3jnwe7" path="res://Assets/Bubbles/bubble_3.png" id="4_isn8i"]
 [ext_resource type="Texture2D" uid="uid://brii0m6y2rf4r" path="res://Assets/Bubbles/bubble_4.png" id="5_kwcnu"]
 [ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="9_qho2h"]
+[ext_resource type="Shader" path="res://Shaders/highlight.gdshader" id="10_r0ec2"]
 
 [sub_resource type="Animation" id="Animation_vtpff"]
 length = 0.001
@@ -104,6 +105,19 @@ _data = {
 shader = ExtResource("9_qho2h")
 shader_parameter/gray_a = 0.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l6i4s"]
+shader = ExtResource("10_r0ec2")
+shader_parameter/Line_Smoothness = 0.045
+shader_parameter/Line_Width = 0.054
+shader_parameter/Brightness = 3.0
+shader_parameter/Rotation_deg = 30.0
+shader_parameter/Distortion = 1.8
+shader_parameter/Speed = 0.7
+shader_parameter/Position = 0.0
+shader_parameter/Position_Min = 0.25
+shader_parameter/Position_Max = 0.5
+shader_parameter/Alpha = 1.0
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_u8chl")
 
@@ -180,6 +194,16 @@ offset_right = 1280.0
 offset_bottom = 960.0
 mouse_filter = 2
 
+[node name="Highlight" type="ColorRect" parent="."]
+visible = false
+z_index = 5
+material = SubResource("ShaderMaterial_l6i4s")
+offset_right = 1280.0
+offset_bottom = 960.0
+
+[node name="WinningTimer" type="Timer" parent="."]
+wait_time = 3.0
+
 [connection signal="timeDone" from="LevelTimer" to="." method="_on_level_timer_time_done"]
 [connection signal="mouse_entered" from="RapBubble1/RapBubbleCollision1" to="." method="_on_rap_bubble_collision_1_mouse_entered"]
 [connection signal="mouse_exited" from="RapBubble1/RapBubbleCollision1" to="." method="_on_rap_bubble_collision_1_mouse_exited"]
@@ -189,3 +213,4 @@ mouse_filter = 2
 [connection signal="mouse_exited" from="RapBubble3/RapBubbleCollision3" to="." method="_on_rap_bubble_collision_3_mouse_exited"]
 [connection signal="mouse_entered" from="RapBubble4/RapBubbleCollision4" to="." method="_on_rap_bubble_collision_4_mouse_entered"]
 [connection signal="mouse_exited" from="RapBubble4/RapBubbleCollision4" to="." method="_on_rap_bubble_collision_4_mouse_exited"]
+[connection signal="timeout" from="WinningTimer" to="." method="_on_winning_timer_timeout"]

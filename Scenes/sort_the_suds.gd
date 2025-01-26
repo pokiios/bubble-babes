@@ -20,15 +20,14 @@ signal lose
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$Highlight.visible = false
 	mat.set_shader_parameter("gray_a", 0)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$AnimationPlayer.stop(true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if !sud1.visible && !sud2.visible && !sud3.visible && !losing:
-		print("winner winner")
-		win.emit()
+	pass
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -89,11 +88,20 @@ func _on_sud_collision_3_mouse_exited() -> void:
 		sudHovered3 = false
 
 func _on_level_timer_time_done() -> void:
-	$AnimationPlayer.play("fade_gray")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	print("loser loser")
+	if !sud1.visible && !sud2.visible && !sud3.visible && !losing:
+		print("winner winner")
+		$Highlight.visible = true
+		$WinningTimer.start()
+	else:
+		$AnimationPlayer.play("fade_gray")
+		print("loser loser")
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	lose.emit()
 	pass # Replace with function body.
+
+
+func _on_winning_timer_timeout() -> void:
+	win.emit()

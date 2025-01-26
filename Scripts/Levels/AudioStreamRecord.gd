@@ -6,6 +6,7 @@ var success_percent:float
 @export_enum("Bubblegum Pop", "Speech Bubble") var levels # levels enum to select what level you want to trigger
 var loudness
 var has_been_called : bool = false
+var stop : bool = false
 signal level_complete
 
 # Called when the node enters the scene tree for the first time.
@@ -20,9 +21,9 @@ func _process(_delta: float) -> void:
 		loudness = get_power()
 		if loudness >= threshhold:
 			success_percent += success_increments
-			trigger_effect()
 		else:
 			success_percent -= success_increments
+		if !stop:
 			trigger_effect()
 
 # Gets db level of 
@@ -35,6 +36,7 @@ func trigger_effect():
 		0:
 			if success_percent >= 1 and !has_been_called:
 				has_been_called = true
+				stop = true
 				level_complete.emit()
 			else:
 				if is_instance_valid($"../Bubble"):
@@ -57,4 +59,5 @@ func trigger_effect():
 			if success_percent >= 1 and !has_been_called:
 				has_been_called = true
 				level_complete.emit()
+				stop = true
 				$"../AnimationPlayer".play("Shake")
